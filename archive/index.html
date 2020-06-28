@@ -17,10 +17,19 @@
   <meta name="description" content="Muxi_k&#39;s Blog">
   <meta name="author" content="Muxi_k">
   <meta name="keywords" content="Muxi_k 慕夕">
-  <title>Muxi_k</title>
+  <title>archive - Muxi_k</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -42,7 +51,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -155,10 +164,6 @@
           </div>
 
           
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
-          
         </div>
       </div>
     </div>
@@ -168,72 +173,16 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          style=margin-top:0>
+          >
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/06/28/Vue-cli3-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">Vue cli3 跨域请求</a>
-
-      <a href="/2020/06/28/Vue-cli3-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/" class="index-excerpt">
-        
-        
-          
-        
-        <div>问题最近学了Vue 想写点demo练习一下 就用tp写了个接口
-
-此时
-server：api.org:80/users
-client : 127.0.0.1:8080
-
-
-
-
-
-当我写完请求后发现出问题了
-// 请求代码
-getUsersTable() &#123;
-      this.$http
-        .get("api.org/users")
-        .then(res =</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-06-28
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Javascript/">Javascript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Vue/">Vue</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-
-
-
+<div class="page-content">
+  
+</div>
 
               </div>
             </div>
@@ -324,7 +273,7 @@ getUsersTable() &#123;
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "念念不忘,必有回想&nbsp;",
+        "archive&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -338,6 +287,21 @@ getUsersTable() &#123;
   </script>
 
 
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
 
 
 

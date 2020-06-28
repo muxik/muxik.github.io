@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Vue cli3 跨域请求</title>
+    <link href="/2020/06/28/Vue-cli3-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
+    <url>/2020/06/28/Vue-cli3-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</url>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>最近学了Vue 想写点demo练习一下 就用tp写了个接口</p><ul><li>此时<ul><li>server：api.org:80/users<ul><li>client : 127.0.0.1:8080</li></ul></li></ul></li></ul><p>当我写完请求后发现出问题了</p><pre><code class="hljs javascript"><span class="hljs-comment">// 请求代码</span>getUsersTable() &#123;      <span class="hljs-keyword">this</span>.$http        .get(<span class="hljs-string">"api.org/users"</span>)        .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> &#123;          <span class="hljs-built_in">console</span>.log(res);          <span class="hljs-keyword">this</span>.users = res.body;        &#125;)        .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> &#123;          <span class="hljs-built_in">console</span>.error(err);        &#125;);    &#125;</code></pre><p><strong>报错如下：</strong><br>   <code>Access to XMLHttpRequest at &#39;http://api.org/users&#39; from origin &#39;http://127.0.0.1:8080&#39; has been blocked by CORS policy: No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource.</code></p><p>   发现是跨域问题</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法　"></a>解决方法　</h2><ol><li><p>配置文件<br>  创建配置文件<code>vue.config.js</code>,与<code>package.json</code> 同级</p></li><li><p>安装代理<br> 现在vue cli3默认是没有devServer的，需要手动安装</p><pre><code class="hljs bash">$ npm install --save-dev http-proxy-middleware</code></pre></li><li><p>写入配置</p></li></ol><pre><code class="hljs javascript"><span class="hljs-built_in">module</span>.exports = &#123;    devServer: &#123;        proxy: &#123;            <span class="hljs-comment">//配置跨域</span>            <span class="hljs-string">'/api'</span>: &#123;                target: <span class="hljs-string">"http://api.org"</span>,                ws: <span class="hljs-literal">true</span>,                changOrigin: <span class="hljs-literal">true</span>,                pathRewrite: &#123;                    <span class="hljs-string">'^/api'</span>: <span class="hljs-string">'/'</span>                &#125;            &#125;        &#125;    &#125;&#125;</code></pre><p>这里要把请求路径该一下：<br><code>.get(&quot;api.org/users&quot;)</code><br>改成:<br><code>.get(&quot;api/users&quot;)</code></p><h3 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h3><p>如果你是用tp写的接口<br>把    <code>app.config里的　app_debug = true 改为　false</code><br><strong>linux下</strong><br><em>runtime 权限改为777</em></p><pre><code class="hljs bash">$ sudo chmod 777 runtime</code></pre><p><strong>否则请求的时候会有服务器500错误</strong></p><hr><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><strong><a href="https://cli.vuejs.org/zh/config/#devserver-proxy" target="_blank" rel="noopener">https://cli.vuejs.org/zh/config/#devserver-proxy</a></strong><br><strong><a href="https://github.com/chimurai/http-proxy-middleware#proxycontext-config" target="_blank" rel="noopener">https://github.com/chimurai/http-proxy-middleware#proxycontext-config</a></strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Javascript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Vue</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
