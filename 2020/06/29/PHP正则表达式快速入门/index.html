@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Muxi_k&#39;s Blog">
+  <meta name="author" content="Muxi_k">
+  <meta name="keywords" content="Muxi_k 慕夕">
+  <title> PHP正则表达式快速入门 - Muxi_k</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Muxi_k</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-29 07:48">
+      June 29, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <blockquote>
+<p>php 正则表达式学习笔记</p>
+</blockquote>
+<h2 id="什么是正则表达式"><a href="#什么是正则表达式" class="headerlink" title="什么是正则表达式"></a>什么是正则表达式</h2><ol>
+<li><p>正则表达式(Regular Expressions(Perl-Compatible))，就是一个匹配的模式</p>
+</li>
+<li><p>正则表达本身就是一个字符串</p>
+</li>
+<li><p>正则表达式要在对应的函数中使用</p>
+</li>
+</ol>
+<ul>
+<li><p>在 PHP 中有两套正则表达式函数库，两者功能相似，只是执行效率略有差异</p>
+<ul>
+<li>一套由 PCRE 库提供的使用<code>preg_</code>为前缀命名的函数</li>
+<li>一套由 POSIX 扩展提供的，使用以<code>ereg_</code>为前缀的函数</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>PCRE 来源于 Perl 语言符号</li>
+<li>PCRE 语法支持更多特性比 POSIX 跟强大</li>
+</ul>
+<hr>
+<h2 id="正则语法"><a href="#正则语法" class="headerlink" title="正则语法"></a>正则语法</h2><pre><code class="hljs xml"><span class="php"><span class="hljs-meta">&lt;?php</span></span>
+<span class="php">$reg = <span class="hljs-string">"/a\d/i"</span></span></code></pre>
+
+<ul>
+<li>定界符号，可以使用多种，常用为<code>//</code></li>
+<li>原子：最小的匹配单位 <code>\a\</code>（要放在定界符中）</li>
+<li>元字符：不能单独使用，修饰原子,是用来扩展原子功能和限制<code>/\d/</code>（要放在定界符中）</li>
+<li>模式修正符号：修正，对模式（正则的修正）<code>/a/i</code>(要放在定界符外)</li>
+</ul>
+<hr>
+<h2 id="正则表达式中的原子"><a href="#正则表达式中的原子" class="headerlink" title="正则表达式中的原子"></a>正则表达式中的原子</h2><p>原子是正则表达式的最小单位，一个表达式至少由一个原子组成</p>
+<p>原子是由所有那些未被显示指定为元字符的 打印字符和非打印字符组成，具体分为 5 类。(所有的字符都是原子)</p>
+<ol>
+<li><strong>普通字符作为原子:<code>a-z A-Z 0-9</code>等</strong></li>
+<li><strong>一些特殊字符和转移后元字符可作为原子：</strong><ul>
+<li>所有的标点符号，但语句特殊意义的符号需要转义后才可做为原子，如 <code>\&quot;\&#39;\*\+\?\.</code>等</li>
+</ul>
+</li>
+<li><strong>一些非打印字符作为原子：如<code>\f\n\r\t\cx</code></strong></li>
+<li><strong>使用”通用字符类型” 作为原子: 如:<code>\d\D\w\W\s\S</code></strong></li>
+<li><strong>自定义的原子表([])作为原子:如：<code>&#39;/[apj]sp/&#39; &#39;/[^apj]sp/&#39;</code></strong></li>
+</ol>
+<h3 id="普通字符作为原子"><a href="#普通字符作为原子" class="headerlink" title="普通字符作为原子"></a>普通字符作为原子</h3><ul>
+<li>打印字符<code>a-z A-Z 0-9 !@#$%^&amp;*()...</code></li>
+<li>非打印字符<code>\n...</code></li>
+</ul>
+<pre><code class="hljs php">$str = <span class="hljs-string">"this is a ^ test "</span>;
+
+$reg = <span class="hljs-string">"/\^/"</span>;
+
+<span class="hljs-keyword">if</span> (preg_match($reg, $str, $arr)) &#123;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"正则表达式&#123;$reg&#125;和&#123;$str&#125;匹配成功!\n"</span>;
+    print_r($arr);
+&#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"匹配失败"</span>;
+&#125;</code></pre>
+
+<pre><code class="hljs bash">正则表达式/\^/和this is a ^ <span class="hljs-built_in">test</span> 匹配成功!
+Array
+(
+    [0] =&gt; ^
+)</code></pre>
+
+<p><strong><code>&#39;\&#39;</code>:转义符号:</strong></p>
+<h3 id="一些特殊字符和转移后元字符可作为原子"><a href="#一些特殊字符和转移后元字符可作为原子" class="headerlink" title="一些特殊字符和转移后元字符可作为原子"></a>一些特殊字符和转移后元字符可作为原子</h3><ul>
+<li>可以将有意义的符号转成没有意义的原子，例如<code>/\^/</code></li>
+<li>可以将没有意义的字符转成有意义的原子，例如<code>/\t/</code>(tab 键)</li>
+<li><code>a-z A-Z 0-9</code> 所有这些没有意义的字符，加上转义也没有意义的有都是可以加可不加的</li>
+</ul>
+<p>除了<code>a-z A-Z 0-9</code>这些符号不需要转移，其他符号使用时最好转义，大多数特殊符号有特别意义</p>
+<hr>
+<h3 id="使用”通用字符类型”"><a href="#使用”通用字符类型”" class="headerlink" title="使用”通用字符类型”"></a>使用”通用字符类型”</h3><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\d</code></td>
+<td>代表任意一个数字</td>
+</tr>
+<tr>
+<td><code>\D</code></td>
+<td>代表任意一个非数字</td>
+</tr>
+</tbody></table>
+<pre><code class="hljs bash"><span class="hljs-comment"># /\d/</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-string">"this is a 123 test 11"</span>;
+// 匹配所有数字
+<span class="hljs-variable">$reg</span> = <span class="hljs-string">"/\d/"</span>;
+------------------------------------------
+正则表达式/\d/和this is a 123 <span class="hljs-built_in">test</span> 11匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; 1
+            [1] =&gt; 2
+            ...
+        )
+
+)</code></pre>
+
+<pre><code class="hljs bash"><span class="hljs-comment"># /\D/</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-string">"this is a 123 test 11"</span>;
+
+// 匹配所有数字
+<span class="hljs-variable">$reg</span> = <span class="hljs-string">"/\D/"</span>;
+------------------------------------------
+正则表达式/\D/和this is a 123 <span class="hljs-built_in">test</span> 11匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; t
+            [3] =&gt; s
+            [4] =&gt;
+            [5] =&gt; i
+            ...
+        )
+
+)</code></pre>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\w</code></td>
+<td>代表任意一个字 a-z A-Z 0-9 _</td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>代表任意一个非字 除了 a-z A-Z 0-9 _之外的所有字符</td>
+</tr>
+</tbody></table>
+<pre><code class="hljs bash"><span class="hljs-comment"># /\w/</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-string">"!@<span class="hljs-variable">$@</span>%%^%<span class="hljs-variable">$@____</span>"</span>;
+// 匹配所有字
+<span class="hljs-variable">$reg</span> = <span class="hljs-string">"/\w/"</span>;
+
+------------------------------------
+正则表达式/\w/和!@<span class="hljs-variable">$@</span>%%^%<span class="hljs-variable">$@____</span>匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; _
+            [1] =&gt; _
+            ...
+        )
+)</code></pre>
+
+<pre><code class="hljs bash"><span class="hljs-comment"># \/W\</span>
+正则表达式/\W/和!@<span class="hljs-variable">$@</span>%%^%<span class="hljs-variable">$@____</span>匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; !
+            [1] =&gt; @
+            [2] =&gt; $
+            [3] =&gt; @
+            ...
+        )
+
+)</code></pre>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\s</code></td>
+<td>代表空白</td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>代表任意一个非空白</td>
+</tr>
+</tbody></table>
+<pre><code class="hljs bash"><span class="hljs-comment"># /\s/</span>
+<span class="hljs-variable">$str</span> = <span class="hljs-string">"qw</span>
+<span class="hljs-string">we   rt"</span>;
+----------
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt;
+            [1] =&gt;
+            [2] =&gt;
+            [3] =&gt;
+        )
+
+)</code></pre>
+
+<pre><code class="hljs bash"><span class="hljs-comment">#/\S/</span>
+正则表达式/\S/和qw
+we   rt匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; q
+            [1] =&gt; w
+            [2] =&gt; w
+            [3] =&gt; e
+            [4] =&gt; r
+            [5] =&gt; t
+        )</code></pre>
+
+<hr>
+<h3 id="自定义的原子表"><a href="#自定义的原子表" class="headerlink" title="自定义的原子表"></a>自定义的原子表</h3><p><strong>使用<code>[]</code>来指定</strong></p>
+<pre><code class="hljs sh"><span class="hljs-comment"># [469]</span>
+正则表达式/[469]/和1243456768909匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; 4
+            [1] =&gt; 4
+            [2] =&gt; 6
+            [3] =&gt; 6
+            [4] =&gt; 9
+            [5] =&gt; 9
+        )
+
+)</code></pre>
+
+<p><strong>可以指定范围用’<code>-</code>‘表示</strong></p>
+<pre><code class="hljs sh">正则表达式/[1-5]/和1243456768909匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; 1
+            [1] =&gt; 2
+            [2] =&gt; 4
+            [3] =&gt; 3
+            [4] =&gt; 4
+            [5] =&gt; 5
+        )
+
+)</code></pre>
+
+<p><strong>非<code>^</code></strong></p>
+<p>匹配所有的非数字</p>
+<pre><code class="hljs sh">正则表达式/[^1-4]/和ass2423匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; a
+            [1] =&gt; s
+            [2] =&gt; s
+        )
+)</code></pre>
+
+<p><strong><code>.</code>点</strong></p>
+<p>代表所有</p>
+<hr>
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><p><strong>正则表达式中的常用非打印字符</strong></p>
+<table>
+<thead>
+<tr>
+<th>原子字符</th>
+<th>含义描 述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\cx</code></td>
+<td>匹配由 x 指明的控制字符，如\cM 匹配一个 Control-M 或返回车符，x 必须为 a-z 或 A-Z 之一</td>
+</tr>
+<tr>
+<td><code>\f</code></td>
+<td>匹配一个换页符，等价与\x0x 或\cL</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>匹配一个换行符，等价与\x0a 或\cJ</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>匹配一个回车符，等价与\x0d 或\cM</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>匹配一个制表符，等价与\x09 或\cI</td>
+</tr>
+<tr>
+<td><code>\v</code></td>
+<td>匹配一个垂直制表符，等价与\x0b 或\cK</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<h2 id="正则表达式中的元字符"><a href="#正则表达式中的元字符" class="headerlink" title="正则表达式中的元字符"></a>正则表达式中的元字符</h2><p><strong>不能在正则表达式单独使用，用来修饰原子</strong></p>
+<ul>
+<li><strong>‘<code>*</code>‘用来修饰前面的原子可以出现 0 个 1 个或多个</strong></li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-comment"># /go*gle/</span>
+正则表达式/go*gle/和this gggggoogle is a <span class="hljs-built_in">test</span> 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; google
+        )
+)</code></pre>
+
+<ul>
+<li><strong>‘<code>+</code>‘ 匹配 1 次或多次其前的原子(前面原子至少出现一次)</strong></li>
+</ul>
+<pre><code class="hljs sh">正则表达式/g+oogle/和this gggggoogle is a <span class="hljs-built_in">test</span> 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; gggggoogle
+        )
+)</code></pre>
+
+<ul>
+<li><strong>‘<code>?</code>‘ 匹配 1 次或多次其前的原子(前面原子不能出现多次)</strong></li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-comment">#正则表达式/go?gle/和this gogle is a test 匹配成功!</span>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; gogle
+        )</code></pre>
+
+<ul>
+<li><strong><code>{n}</code> 表示其前面的原子恰好出现 n 次</strong></li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2&#125;gle/和this google is a test 匹配成功!</span>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; google
+        )
+)</code></pre>
+
+<ul>
+<li><strong><code>{n,}</code> 表示其前面的原子出现不小于 n</strong></li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2,&#125;gle/和this google is a test 匹配成功!</span>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; google
+        )
+)</code></pre>
+
+<ul>
+<li><strong><code>{n,m}</code> 表示其前面的原子至少出现 n 次，最多出现 m</strong></li>
+</ul>
+<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;1,3&#125;gle/和this google is a test 匹配成功!</span>
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; google
+        )
+)</code></pre>
+
+<ul>
+<li><strong><code>()</code></strong><ul>
+<li>改变优先级别</li>
+<li>将小原子改变成大原子</li>
+<li>子模式，整个表达式是一个大的模式，小括号中是每个独立的子模式</li>
+<li>反向引用</li>
+</ul>
+</li>
+</ul>
+<pre><code class="hljs sh">
+正则表达式/orac(le|my)/和this oracmysql is a <span class="hljs-built_in">test</span> 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; oracmy
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; my
+        )
+)</code></pre>
+
+<pre><code class="hljs sh">正则表达式/orac(mysql)*/和this oracmysql is a mysql 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; oracmysql
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; mysql
+        )
+
+)</code></pre>
+
+<pre><code class="hljs sh">正则表达式/(http|ftp):\/\/\www(.*)?\.(com|net)/和this http://www.baidu.com oracmysql ftp://www.exp.net is a mysql 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; http://www.baidu.com oracmysql ftp://www.exp.net
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; http
+        )
+
+    [2] =&gt; Array
+        (
+            [0] =&gt; .baidu.com oracmysql ftp://www.exp
+        )
+
+    [3] =&gt; Array
+        (
+            [0] =&gt; net
+        )
+
+)</code></pre>
+
+<pre><code class="hljs sh">正则表达式/\d&#123;4&#125;(-|\/)\d&#123;2&#125;\1\d&#123;2&#125;/和this 2020-03-06 2020/03/06 匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; 2020-03-06
+            [1] =&gt; 2020/03/06
+        )
+
+    [1] =&gt; Array
+        (
+            [0] =&gt; -
+            [1] =&gt; /
+        )
+
+)</code></pre>
+
+<h3 id="元字符表"><a href="#元字符表" class="headerlink" title="元字符表"></a>元字符表</h3><table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>含义描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>*</code></td>
+<td>匹配 0 次，1 次或多次其前的原子</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>匹配 1 次或多次其前的原子</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>匹配 0 次或 1 次其前的原子</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>匹配两个或多个分支选择</td>
+</tr>
+<tr>
+<td><code>{n}</code></td>
+<td>表示其前面的原子恰好出现 n 次</td>
+</tr>
+<tr>
+<td><code>{n,}</code></td>
+<td>表示其前面的原子出现不小于 n 次</td>
+</tr>
+<tr>
+<td><code>{n,m}</code></td>
+<td>表示其前面的原子至少出现 n 次，最多出现 m 次</td>
+</tr>
+<tr>
+<td><code>^或、A</code></td>
+<td>匹配输入字符串的开始位置(或在多模式下行的开头，既紧随一个换行符之后)</td>
+</tr>
+<tr>
+<td><code>\$或\Z</code></td>
+<td>匹配输入字符串的结束位置(或在多模式下行的开头，既紧随一个换行符之后)</td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>匹配单词的边界</td>
+</tr>
+<tr>
+<td><code>\B</code></td>
+<td>匹配除单词边界以外的部分</td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td>匹配整体为一个原子，即模式单元，可以理解为由多个单原子组成的大原子</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="模式修正符号-单个字符"><a href="#模式修正符号-单个字符" class="headerlink" title="模式修正符号(单个字符)"></a>模式修正符号(单个字符)</h2><ol>
+<li>模式修正符号要写在定界符号之外(右边)</li>
+</ol>
+<p>例:</p>
+<pre><code class="hljs php"><span class="hljs-string">"/go*gle/i"</span></code></pre>
+
+<ol start="2">
+<li><p>模式修正符号 ，一个字符就是一个功能</p>
+</li>
+<li><p>作用:</p>
+<ul>
+<li>模式修正符号可以修正正则表达式的解释,扩充了正则表达式的功能</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><code>i</code>:修正正则表达式不区分大小写 (默认是区分大小写的)</li>
+</ul>
+<pre><code class="hljs sh">正则表达式/<span class="hljs-built_in">test</span>/i和this is a Test匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; Test
+        )
+)</code></pre>
+
+<ul>
+<li><code>m</code> 把多行视为多行(默认正则把多行视为一行)</li>
+</ul>
+<pre><code class="hljs sh">正则表达式/^is/m和this
+is a Test匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; is
+        )
+)</code></pre>
+
+<ul>
+<li><code>s</code>修正正则表达式中的.可以匹配换行符号(默认.不可以匹配换行符)</li>
+</ul>
+<pre><code class="hljs sh">正则表达式/Te.*st/s和this is a Te
+st匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; Te
+st
+        )
+)</code></pre>
+
+<ul>
+<li><code>s</code>修正正则表达式，可以省略空白</li>
+</ul>
+<pre><code class="hljs sh">正则表达式/web server/ix和this is a WebServer匹配成功!
+Array
+(
+    [0] =&gt; Array
+        (
+            [0] =&gt; WebServer
+        )
+
+)</code></pre>
+
+<ul>
+<li><code>U</code>(.* ,+)正则表达式比较贪婪 U 可以取消贪婪模式(不经常使用一般用(.*?))</li>
+</ul>
+<h2 id="正则表达式的编写"><a href="#正则表达式的编写" class="headerlink" title="正则表达式的编写"></a>正则表达式的编写</h2><ol>
+<li>正则表达式就是一种语言，要学会开放思想</li>
+<li>列需求</li>
+</ol>
+<p>编写匹配 url 正则</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+$str = <span class="hljs-string">"</span>
+<span class="hljs-string">    这是http://www.example.com网站</span>
+<span class="hljs-string">    这是http://www.xxx.net/index.php网站</span>
+<span class="hljs-string">    这是http://www.example.cn/php网站</span>
+<span class="hljs-string">    这是http://www.demo.org/login.php?user=aaa网站</span>
+<span class="hljs-string">    这是https://www.test.top网站</span>
+<span class="hljs-string">    这是https://news.baidu.top网站</span>
+<span class="hljs-string">    这是ftp://news.baidu.top网站</span>
+<span class="hljs-string">"</span>;
+
+
+$reg = <span class="hljs-string">"/(https?|ftps?):\/\/(.*?).(.*?).(com|net|org|cn|top)([\w\.\/\=\?\&amp;]*)?/"</span>;
+
+preg_match_all($reg, $str, $arr);
+print_r($arr);</code></pre>
+
+<p>编写匹配 email 正则</p>
+<pre><code class="hljs php">
+<span class="hljs-meta">&lt;?php</span>
+
+$str = <span class="hljs-string">"</span>
+<span class="hljs-string">    这是lqjxm666@163.com邮箱</span>
+<span class="hljs-string">    这是muxi-Kf4@gmail.com邮箱</span>
+<span class="hljs-string">    这是muxi_k_ing@163.com邮箱</span>
+<span class="hljs-string">    这是muxi_k@xx-xx.com邮箱</span>
+<span class="hljs-string">"</span>;
+
+
+$reg = <span class="hljs-string">"/\w+([-+]\w+)*@\w+(-.\w+)*\.\w+/i"</span>;
+
+preg_match_all($reg, $str, $arr);
+print_r($arr);</code></pre>
+
+<h2 id="正则表达式使用"><a href="#正则表达式使用" class="headerlink" title="正则表达式使用"></a>正则表达式使用</h2><p>分割、匹配、查找、替换</p>
+<ol>
+<li>字符串处理函数(处理快，但有一些做不到)</li>
+<li>正则表达式函数(功能强大,但效率低)</li>
+</ol>
+<p>注意：能用字符串处理函数处理的字符串，就不用正则处理</p>
+<p>匹配查找:</p>
+<ul>
+<li>strstr()</li>
+<li>strpos()</li>
+<li>substr()</li>
+</ul>
+<p>正则匹配</p>
+<ul>
+<li>preg_match()</li>
+<li>preg_match_all()</li>
+<li>preg_grep()</li>
+</ul>
+<p>字符串分割</p>
+<ul>
+<li>explode()</li>
+<li>implode()</li>
+<li>join()</li>
+</ul>
+<p>正则分割</p>
+<ul>
+<li>preg_split()</li>
+</ul>
+<p>字符串替换</p>
+<ul>
+<li>str_replace()</li>
+</ul>
+<p>正则替换</p>
+<ul>
+<li>preg_replace()</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Javascript/">Javascript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/28/Vue-cli3-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/">
+                        <span class="hidden-mobile">Vue cli3 跨域请求</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Muxi_k</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        " PHP正则表达式快速入门&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
