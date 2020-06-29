@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark-reasonable.min.css" />
   
 
   
@@ -241,8 +241,8 @@
 <li>PCRE 语法支持更多特性比 POSIX 跟强大</li>
 </ul>
 <hr>
-<h2 id="正则语法"><a href="#正则语法" class="headerlink" title="正则语法"></a>正则语法</h2><pre><code class="hljs xml"><span class="php"><span class="hljs-meta">&lt;?php</span></span>
-<span class="php">$reg = <span class="hljs-string">"/a\d/i"</span></span></code></pre>
+<h2 id="正则语法"><a href="#正则语法" class="headerlink" title="正则语法"></a>正则语法</h2><div class="hljs"><pre><code class="hljs xml"><span class="php"><span class="hljs-meta">&lt;?php</span></span>
+<span class="php">$reg = <span class="hljs-string">"/a\d/i"</span></span></code></pre></div>
 
 <ul>
 <li>定界符号，可以使用多种，常用为<code>//</code></li>
@@ -267,7 +267,7 @@
 <li>打印字符<code>a-z A-Z 0-9 !@#$%^&amp;*()...</code></li>
 <li>非打印字符<code>\n...</code></li>
 </ul>
-<pre><code class="hljs php">$str = <span class="hljs-string">"this is a ^ test "</span>;
+<div class="hljs"><pre><code class="hljs php">$str = <span class="hljs-string">"this is a ^ test "</span>;
 
 $reg = <span class="hljs-string">"/\^/"</span>;
 
@@ -276,13 +276,13 @@ $reg = <span class="hljs-string">"/\^/"</span>;
     print_r($arr);
 &#125; <span class="hljs-keyword">else</span> &#123;
     <span class="hljs-keyword">echo</span> <span class="hljs-string">"匹配失败"</span>;
-&#125;</code></pre>
+&#125;</code></pre></div>
 
-<pre><code class="hljs bash">正则表达式/\^/和this is a ^ <span class="hljs-built_in">test</span> 匹配成功!
+<div class="hljs"><pre><code class="hljs bash">正则表达式/\^/和this is a ^ <span class="hljs-built_in">test</span> 匹配成功!
 Array
 (
     [0] =&gt; ^
-)</code></pre>
+)</code></pre></div>
 
 <p><strong><code>&#39;\&#39;</code>:转义符号:</strong></p>
 <h3 id="一些特殊字符和转移后元字符可作为原子"><a href="#一些特殊字符和转移后元字符可作为原子" class="headerlink" title="一些特殊字符和转移后元字符可作为原子"></a>一些特殊字符和转移后元字符可作为原子</h3><ul>
@@ -308,7 +308,7 @@ Array
 <td>代表任意一个非数字</td>
 </tr>
 </tbody></table>
-<pre><code class="hljs bash"><span class="hljs-comment"># /\d/</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># /\d/</span>
 <span class="hljs-variable">$str</span> = <span class="hljs-string">"this is a 123 test 11"</span>;
 // 匹配所有数字
 <span class="hljs-variable">$reg</span> = <span class="hljs-string">"/\d/"</span>;
@@ -323,9 +323,9 @@ Array
             ...
         )
 
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs bash"><span class="hljs-comment"># /\D/</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># /\D/</span>
 <span class="hljs-variable">$str</span> = <span class="hljs-string">"this is a 123 test 11"</span>;
 
 // 匹配所有数字
@@ -343,7 +343,7 @@ Array
             ...
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <hr>
 <table>
@@ -362,7 +362,7 @@ Array
 <td>代表任意一个非字 除了 a-z A-Z 0-9 _之外的所有字符</td>
 </tr>
 </tbody></table>
-<pre><code class="hljs bash"><span class="hljs-comment"># /\w/</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># /\w/</span>
 <span class="hljs-variable">$str</span> = <span class="hljs-string">"!@<span class="hljs-variable">$@</span>%%^%<span class="hljs-variable">$@____</span>"</span>;
 // 匹配所有字
 <span class="hljs-variable">$reg</span> = <span class="hljs-string">"/\w/"</span>;
@@ -377,9 +377,9 @@ Array
             [1] =&gt; _
             ...
         )
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs bash"><span class="hljs-comment"># \/W\</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># \/W\</span>
 正则表达式/\W/和!@<span class="hljs-variable">$@</span>%%^%<span class="hljs-variable">$@____</span>匹配成功!
 Array
 (
@@ -392,7 +392,7 @@ Array
             ...
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <hr>
 <table>
@@ -411,7 +411,7 @@ Array
 <td>代表任意一个非空白</td>
 </tr>
 </tbody></table>
-<pre><code class="hljs bash"><span class="hljs-comment"># /\s/</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># /\s/</span>
 <span class="hljs-variable">$str</span> = <span class="hljs-string">"qw</span>
 <span class="hljs-string">we   rt"</span>;
 ----------
@@ -425,9 +425,9 @@ Array
             [3] =&gt;
         )
 
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs bash"><span class="hljs-comment">#/\S/</span>
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment">#/\S/</span>
 正则表达式/\S/和qw
 we   rt匹配成功!
 Array
@@ -440,11 +440,11 @@ Array
             [3] =&gt; e
             [4] =&gt; r
             [5] =&gt; t
-        )</code></pre>
+        )</code></pre></div>
 
 <hr>
 <h3 id="自定义的原子表"><a href="#自定义的原子表" class="headerlink" title="自定义的原子表"></a>自定义的原子表</h3><p><strong>使用<code>[]</code>来指定</strong></p>
-<pre><code class="hljs sh"><span class="hljs-comment"># [469]</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment"># [469]</span>
 正则表达式/[469]/和1243456768909匹配成功!
 Array
 (
@@ -458,10 +458,10 @@ Array
             [5] =&gt; 9
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <p><strong>可以指定范围用’<code>-</code>‘表示</strong></p>
-<pre><code class="hljs sh">正则表达式/[1-5]/和1243456768909匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/[1-5]/和1243456768909匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -474,11 +474,11 @@ Array
             [5] =&gt; 5
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <p><strong>非<code>^</code></strong></p>
 <p>匹配所有的非数字</p>
-<pre><code class="hljs sh">正则表达式/[^1-4]/和ass2423匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/[^1-4]/和ass2423匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -487,7 +487,7 @@ Array
             [1] =&gt; s
             [2] =&gt; s
         )
-)</code></pre>
+)</code></pre></div>
 
 <p><strong><code>.</code>点</strong></p>
 <p>代表所有</p>
@@ -533,7 +533,7 @@ Array
 <ul>
 <li><strong>‘<code>*</code>‘用来修饰前面的原子可以出现 0 个 1 个或多个</strong></li>
 </ul>
-<pre><code class="hljs sh"><span class="hljs-comment"># /go*gle/</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment"># /go*gle/</span>
 正则表达式/go*gle/和this gggggoogle is a <span class="hljs-built_in">test</span> 匹配成功!
 Array
 (
@@ -541,66 +541,66 @@ Array
         (
             [0] =&gt; google
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><strong>‘<code>+</code>‘ 匹配 1 次或多次其前的原子(前面原子至少出现一次)</strong></li>
 </ul>
-<pre><code class="hljs sh">正则表达式/g+oogle/和this gggggoogle is a <span class="hljs-built_in">test</span> 匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/g+oogle/和this gggggoogle is a <span class="hljs-built_in">test</span> 匹配成功!
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; gggggoogle
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><strong>‘<code>?</code>‘ 匹配 1 次或多次其前的原子(前面原子不能出现多次)</strong></li>
 </ul>
-<pre><code class="hljs sh"><span class="hljs-comment">#正则表达式/go?gle/和this gogle is a test 匹配成功!</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment">#正则表达式/go?gle/和this gogle is a test 匹配成功!</span>
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; gogle
-        )</code></pre>
+        )</code></pre></div>
 
 <ul>
 <li><strong><code>{n}</code> 表示其前面的原子恰好出现 n 次</strong></li>
 </ul>
-<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2&#125;gle/和this google is a test 匹配成功!</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2&#125;gle/和this google is a test 匹配成功!</span>
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; google
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><strong><code>{n,}</code> 表示其前面的原子出现不小于 n</strong></li>
 </ul>
-<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2,&#125;gle/和this google is a test 匹配成功!</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;2,&#125;gle/和this google is a test 匹配成功!</span>
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; google
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><strong><code>{n,m}</code> 表示其前面的原子至少出现 n 次，最多出现 m</strong></li>
 </ul>
-<pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;1,3&#125;gle/和this google is a test 匹配成功!</span>
+<div class="hljs"><pre><code class="hljs sh"><span class="hljs-comment"># 正则表达式/go&#123;1,3&#125;gle/和this google is a test 匹配成功!</span>
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; google
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><strong><code>()</code></strong><ul>
@@ -611,7 +611,7 @@ Array
 </ul>
 </li>
 </ul>
-<pre><code class="hljs sh">
+<div class="hljs"><pre><code class="hljs sh">
 正则表达式/orac(le|my)/和this oracmysql is a <span class="hljs-built_in">test</span> 匹配成功!
 Array
 (
@@ -624,9 +624,9 @@ Array
         (
             [0] =&gt; my
         )
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs sh">正则表达式/orac(mysql)*/和this oracmysql is a mysql 匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/orac(mysql)*/和this oracmysql is a mysql 匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -639,9 +639,9 @@ Array
             [0] =&gt; mysql
         )
 
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs sh">正则表达式/(http|ftp):\/\/\www(.*)?\.(com|net)/和this http://www.baidu.com oracmysql ftp://www.exp.net is a mysql 匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/(http|ftp):\/\/\www(.*)?\.(com|net)/和this http://www.baidu.com oracmysql ftp://www.exp.net is a mysql 匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -664,9 +664,9 @@ Array
             [0] =&gt; net
         )
 
-)</code></pre>
+)</code></pre></div>
 
-<pre><code class="hljs sh">正则表达式/\d&#123;4&#125;(-|\/)\d&#123;2&#125;\1\d&#123;2&#125;/和this 2020-03-06 2020/03/06 匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/\d&#123;4&#125;(-|\/)\d&#123;2&#125;\1\d&#123;2&#125;/和this 2020-03-06 2020/03/06 匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -681,7 +681,7 @@ Array
             [1] =&gt; /
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <h3 id="元字符表"><a href="#元字符表" class="headerlink" title="元字符表"></a>元字符表</h3><table>
 <thead>
@@ -747,7 +747,7 @@ Array
 <li>模式修正符号要写在定界符号之外(右边)</li>
 </ol>
 <p>例:</p>
-<pre><code class="hljs php"><span class="hljs-string">"/go*gle/i"</span></code></pre>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-string">"/go*gle/i"</span></code></pre></div>
 
 <ol start="2">
 <li><p>模式修正符号 ，一个字符就是一个功能</p>
@@ -761,19 +761,19 @@ Array
 <ul>
 <li><code>i</code>:修正正则表达式不区分大小写 (默认是区分大小写的)</li>
 </ul>
-<pre><code class="hljs sh">正则表达式/<span class="hljs-built_in">test</span>/i和this is a Test匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/<span class="hljs-built_in">test</span>/i和this is a Test匹配成功!
 Array
 (
     [0] =&gt; Array
         (
             [0] =&gt; Test
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><code>m</code> 把多行视为多行(默认正则把多行视为一行)</li>
 </ul>
-<pre><code class="hljs sh">正则表达式/^is/m和this
+<div class="hljs"><pre><code class="hljs sh">正则表达式/^is/m和this
 is a Test匹配成功!
 Array
 (
@@ -781,12 +781,12 @@ Array
         (
             [0] =&gt; is
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><code>s</code>修正正则表达式中的.可以匹配换行符号(默认.不可以匹配换行符)</li>
 </ul>
-<pre><code class="hljs sh">正则表达式/Te.*st/s和this is a Te
+<div class="hljs"><pre><code class="hljs sh">正则表达式/Te.*st/s和this is a Te
 st匹配成功!
 Array
 (
@@ -795,12 +795,12 @@ Array
             [0] =&gt; Te
 st
         )
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><code>s</code>修正正则表达式，可以省略空白</li>
 </ul>
-<pre><code class="hljs sh">正则表达式/web server/ix和this is a WebServer匹配成功!
+<div class="hljs"><pre><code class="hljs sh">正则表达式/web server/ix和this is a WebServer匹配成功!
 Array
 (
     [0] =&gt; Array
@@ -808,7 +808,7 @@ Array
             [0] =&gt; WebServer
         )
 
-)</code></pre>
+)</code></pre></div>
 
 <ul>
 <li><code>U</code>(.* ,+)正则表达式比较贪婪 U 可以取消贪婪模式(不经常使用一般用(.*?))</li>
@@ -818,7 +818,7 @@ Array
 <li>列需求</li>
 </ol>
 <p>编写匹配 url 正则</p>
-<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+<div class="hljs"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
 
 $str = <span class="hljs-string">"</span>
 <span class="hljs-string">    这是http://www.example.com网站</span>
@@ -834,10 +834,10 @@ $str = <span class="hljs-string">"</span>
 $reg = <span class="hljs-string">"/(https?|ftps?):\/\/(.*?).(.*?).(com|net|org|cn|top)([\w\.\/\=\?\&amp;]*)?/"</span>;
 
 preg_match_all($reg, $str, $arr);
-print_r($arr);</code></pre>
+print_r($arr);</code></pre></div>
 
 <p>编写匹配 email 正则</p>
-<pre><code class="hljs php">
+<div class="hljs"><pre><code class="hljs php">
 <span class="hljs-meta">&lt;?php</span>
 
 $str = <span class="hljs-string">"</span>
@@ -851,7 +851,7 @@ $str = <span class="hljs-string">"</span>
 $reg = <span class="hljs-string">"/\w+([-+]\w+)*@\w+(-.\w+)*\.\w+/i"</span>;
 
 preg_match_all($reg, $str, $arr);
-print_r($arr);</code></pre>
+print_r($arr);</code></pre></div>
 
 <h2 id="正则表达式使用"><a href="#正则表达式使用" class="headerlink" title="正则表达式使用"></a>正则表达式使用</h2><p>分割、匹配、查找、替换</p>
 <ol>
@@ -898,7 +898,7 @@ print_r($arr);</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Javascript/">Javascript</a>
+                      <a class="hover-with-bg" href="/categories/PHP/">PHP</a>
                     
                   </div>
                 
