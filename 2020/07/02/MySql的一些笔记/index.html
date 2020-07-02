@@ -1,0 +1,2199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Muxi_k&#39;s Blog">
+  <meta name="author" content="Muxi_k">
+  <meta name="keywords" content="Muxi_k 慕夕">
+  <title>MySql的一些笔记 - Muxi_k</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/atom-one-dark-reasonable.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Muxi_k</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-07-02 09:34">
+      July 2, 2020 am
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      98
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h1><h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>​        <strong>为啥重新学习？在过去很长一段时间里,我做 PHP 开发都是使用框架，这些框架在进行数据操作时非常方便，甚至不用自己写 SQL 语句，这使我忘了很多之前学习的 MySQL 数据库知识。</strong></p>
+<p>​        <strong>最近接到学校通知，开学有MySQL考试，所以我决定重学MySQL 避免一些不必要的麻烦</strong></p>
+<h1 id="为什么要学习数据库？"><a href="#为什么要学习数据库？" class="headerlink" title="为什么要学习数据库？"></a>为什么要学习数据库？</h1><ol>
+<li>实现数据持久化</li>
+<li>数据结构化，易于查询和管理</li>
+<li>数据的共享性高，冗余度低，易于扩充</li>
+<li>由DBMS统一管理和控制，易于维护</li>
+</ol>
+<h1 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h1><h2 id="1-DB"><a href="#1-DB" class="headerlink" title="1. DB"></a>1. DB</h2><p>​        <strong>数据库( database ) : 储存数据的”仓库” ，它保存了一系列有组织的数据</strong></p>
+<h2 id="2-DBMS"><a href="#2-DBMS" class="headerlink" title="2. DBMS"></a>2. DBMS</h2><p>​        <strong>数据库管理系统( Database Management System ) 。数据库是通过DBMS创建和操作的容器</strong></p>
+<h2 id="3-SQL"><a href="#3-SQL" class="headerlink" title="3. SQL"></a>3. SQL</h2><p>​        <strong>机构化查询语言( Structure Query Language ) : 专门用来与数据库通信的语言</strong></p>
+<ul>
+<li><strong>SQL的优点：</strong><ul>
+<li>不是某个特点的数据库供应商专有的语言，几乎所有 DBMS 都支持SQL</li>
+<li>简单易学</li>
+<li>虽然简单，但实际上是一种强有力的语言，灵活使用语言元素，可以进行非常复杂和高级的数据库操作</li>
+</ul>
+</li>
+</ul>
+<p>#　MySQL存储数据过程</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>表头(header): 每一列的名称;</li>
+<li>列(col): 具有相同数据类型的数据的集合;</li>
+<li>行(row): 每一行用来描述某条记录的具体信息;</li>
+<li>值(value): 行的具体信息, 每个值必须与该列的数据类型相同;</li>
+<li><strong>键(key)</strong>: 键的值在当前列中具有唯一性。</li>
+</ul>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><ol>
+<li>将数据放到表中，表在放到库中</li>
+<li>一个数据库可以有多个表，每个表都有一个名字，用来标识自己，表名具有唯一性。</li>
+<li>表具有一些特性，这些特性定义了数据在表中如何存储，类似 面向对象 中类的设计</li>
+<li>表又列组成，我们也称为字段。 所有表都是由一个或者多个列组成，类似于面向对象中类的熟悉</li>
+<li>表中的数据是按行存储的，每一行类似与面向对象中的对象</li>
+</ol>
+<p>#　MySQL介绍</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2014/03/mysql.jpg" srcset="/img/loading.gif" alt=""></p>
+<p>​        <strong>MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。</strong></p>
+<p>MySQL 是一个关系型数据库管理系统，由瑞典 MySQL AB 公司开发，目前属于 Oracle 公司。MySQL 是一种关联数据库管理系统，关联数据库将数据保存在不同的表中，而不是将所有数据放在一个大仓库内，这样就增加了速度并提高了灵活性。</p>
+<ul>
+<li>MySQL 是开源的，所以你不需要支付额外的费用。</li>
+<li>MySQL 支持大型的数据库。可以处理拥有上千万条记录的大型数据库。</li>
+<li>MySQL 使用标准的 SQL 数据语言形式。</li>
+<li>MySQL 可以运行于多个系统上，并且支持多种语言。这些编程语言包括 C、C++、Python、Java、Perl、PHP、Eiffel、Ruby 和 Tcl 等。</li>
+<li>MySQL 对PHP有很好的支持，PHP 是目前最流行的 Web 开发语言。</li>
+<li>MySQL 支持大型数据库，支持 5000 万条记录的数据仓库，32 位系统表文件最大可支持 4GB，64 位系统支持最大的表文件为8TB。</li>
+<li>MySQL 是可以定制的，采用了 GPL 协议，你可以修改源码来开发自己的 MySQL 系统。</li>
+</ul>
+<h1 id="MySQL-安装"><a href="#MySQL-安装" class="headerlink" title="MySQL 安装"></a>MySQL 安装</h1><ul>
+<li><p>DBMS分为两类</p>
+<ul>
+<li>基于共享文件系统的DBMS (Access)</li>
+<li>基于客户机——服务器的DBMS (MySQL Oracle SQLServer)</li>
+</ul>
+</li>
+<li><p>MySQL安装(linux)</p>
+<ul>
+<li><p>archlinux</p>
+<div class="hljs"><pre><code class="hljs bash">$ sudo pacman -S mysql <span class="hljs-comment"># 下载</span></code></pre></div>
+
+<div class="hljs"><pre><code class="hljs bash">$ sudo mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql <span class="hljs-comment"># 初始化</span></code></pre></div>
+
+<div class="hljs"><pre><code class="hljs bash">$ sudo systemctl start mysqld <span class="hljs-comment"># 启动</span>
+$ sudo systemctl <span class="hljs-built_in">enable</span> mysqld <span class="hljs-comment"># 开机启动</span></code></pre></div>
+
+<div class="hljs"><pre><code class="hljs bash"><span class="hljs-comment"># 修改密码</span>
+$ mysql -uroot -p 
+
+mysql&gt; use mysql；
+mysql&gt; ALTER USER <span class="hljs-string">'root'</span>@<span class="hljs-string">'localhost'</span> IDENTIFIED WITH mysql_native_password BY <span class="hljs-string">'新密码'</span>;
+mysql&gt; FLUSH PRIVILEGES;</code></pre></div>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>MySQL安装(windows)</p>
+<ul>
+<li>自求多福</li>
+</ul>
+</li>
+</ul>
+<h1 id="MySQL-配置文件介绍"><a href="#MySQL-配置文件介绍" class="headerlink" title="MySQL 配置文件介绍"></a>MySQL 配置文件介绍</h1><p><strong>你可以在<code>/etc/mysql/my.cnf</code>路径下找到这个文件并进行一些配置</strong></p>
+<div class="hljs"><pre><code class="hljs tiki"># For advice on how to change settings please see
+# http:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.7&#x2F;en&#x2F;server-configuration-defaults.html
+# *** DO NOT EDIT THIS FILE. It&#39;s a template which will be copied to the
+# *** default location during install, and will be replaced if you
+# *** upgrade to a newer version of MySQL.
+
+[mysqld]
+
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size &#x3D; 128M
+
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+
+# These are commonly set, remove the # and set as required.
+# basedir &#x3D; .....
+# datadir &#x3D; .....
+# port &#x3D; .....
+# server_id &#x3D; .....
+# socket &#x3D; .....
+
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+join_buffer_size &#x3D; 128M
+sort_buffer_size &#x3D; 2M
+read_rnd_buffer_size &#x3D; 2M 
+
+datadir&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql
+socket&#x3D;&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
+
+default-authentication-plugin&#x3D;mysql_native_password
+
+sql_mode&#x3D;NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</code></pre></div>
+
+<p><strong>如果你修改了配置文件它不会立刻生效必须重启MySQL服务</strong></p>
+<div class="hljs"><pre><code class="hljs bash">$ sudo systemctl restart mysqld.service</code></pre></div>
+
+
+
+<h1 id="MySQL-启动停止＆登录退出"><a href="#MySQL-启动停止＆登录退出" class="headerlink" title="MySQL 启动停止＆登录退出"></a>MySQL 启动停止＆登录退出</h1><h2 id="启动停止"><a href="#启动停止" class="headerlink" title="启动停止"></a>启动停止</h2><p>你可以通过系统的服务管理命令启动停止这里演示 Linux &amp; Windows系统</p>
+<ul>
+<li><strong>Linux(Manjaro)</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs bash">$ sudo systemctl start mysqld <span class="hljs-comment"># 启动</span>
+$ sudo systemctl stop  mysqld <span class="hljs-comment"># 停止</span></code></pre></div>
+
+<ul>
+<li><strong>Windows（管理员权限）</strong> </li>
+</ul>
+<div class="hljs"><pre><code class="hljs bash">net start mysqld ::启动
+net stop  mysqld ::停止</code></pre></div>
+
+<p>##　登录退出</p>
+<ul>
+<li><strong>登录</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs bash">＃格式 mysql -h　主机 -u 用户名 -P [端口] -p　密码
+
+$ mysql -h localhost -P 3306 -u root -p admin
+<span class="hljs-comment"># 简写</span>
+$ mysql -uroot -padmin</code></pre></div>
+
+<ul>
+<li><strong>退出</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs bash">mysql&gt; <span class="hljs-built_in">exit</span> 
+<span class="hljs-comment"># 或者</span>
+mysql&gt; quit</code></pre></div>
+
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p><strong>如果你是Windows用户在执行以上操作的时候显示命令不存在的话，你就需要配置你的系统环境变量</strong></p>
+<p><strong>我并不是Windows用户所以，以下来自百度经验:</strong></p>
+<ol>
+<li><p>首先找到MySQL 的安装路径，一直找到“bin”的路径下，如小编我的路径为：C:\Program Files\MySQL\MySQL Server 5.7\bin（这是个人的你的不一定和我一样）</p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=1" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=fbe188707bcf3bc7e800cdece101babd/9f510fb30f2442a745db89d8da43ad4bd01302f1.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+</li>
+<li><p>首先Ctrl + E打开此电脑,然后点击左上角的“计算机”，然后点击“属性”</p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=2" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=6f46d489bc4543a9f51bfacc2e168a7b/7af40ad162d9f2d38b732e92a2ec8a136327cc69.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+</li>
+<li><p>点击“高级系统设置”</p>
+<p>[<img src="https://imgsa.baidu.com/exp/w=500/sign=4625ae6e9cdda144da096cb282b6d009/f2deb48f8c5494eebaed056426f5e0fe98257efb.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></p>
+<p>](<a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=3" target="_blank" rel="noopener">http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=3</a>)</p>
+</li>
+<li><p>打开“环境变量”</p>
+</li>
+</ol>
+<p>[<img src="https://imgsa.baidu.com/exp/w=500/sign=f6d3d35ebb7eca80120539e7a1229712/a6efce1b9d16fdfaeb93b393bf8f8c5495ee7bcb.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></p>
+<p>](<a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=4" target="_blank" rel="noopener">http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=4</a>)</p>
+<ol start="5">
+<li><p>找到环境变量中的Path,然后对其编辑，将C:\Program Files\MySQL\MySQL Server 5.7\bin，这个路径加在变量值的开始处，然后在C:\Program Files\MySQL\MySQL Server 5.7\bin后要加个英文的分号</p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=5" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=2a48b152b5096b6381195e503c338733/96dda144ad34598292b993ef07f431adcbef849f.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+<p>[<img src="https://imgsa.baidu.com/exp/w=500/sign=e8947c8a943df8dca63d8f91fd1072bf/0e2442a7d933c8954918ea06da1373f08202006c.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></p>
+<p>](<a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=6" target="_blank" rel="noopener">http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=6</a>)</p>
+</li>
+<li><p>最后就是三个“确定”</p>
+</li>
+</ol>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=7" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=58088ab115178a82ce3c7fa0c603737f/562c11dfa9ec8a13b909279dfc03918fa0ecc0b8.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=8" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=6503ae89bc4543a9f51bfacc2e178a7b/7af40ad162d9f2d381365492a2ec8a136327ccac.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=9" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=7e590a072ba446237ecaa562a8237246/c75c10385343fbf2a16ad65ebb7eca8065388f0c.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+<ol start="7">
+<li><p>然后win+ r 打开“运行”，然后输入CMD 打开命令提示符</p>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=10" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=e4c9965b0224ab18e016e13705fbe69a/4b90f603738da9778fbdf556bb51f8198618e339.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+</li>
+<li><p>然后在命令提示符中输入mysql -V(V是大写的)，出现版本信息说明已经配置好了</p>
+</li>
+</ol>
+<p><a href="http://jingyan.baidu.com/album/4dc4084850e1ecc8d946f1f3.html?picindex=11" target="_blank" rel="noopener"><img src="https://imgsa.baidu.com/exp/w=500/sign=5815c04caa8b87d65042ab1f37082860/21a4462309f79052732b354307f3d7ca7bcbd593.jpg" srcset="/img/loading.gif" alt="win10 下MySQL 环境变量设置"></a></p>
+<h1 id="MySQL-配置文件介绍-1"><a href="#MySQL-配置文件介绍-1" class="headerlink" title="MySQL 配置文件介绍"></a>MySQL 配置文件介绍</h1><p><strong>你可以在<code>/etc/mysql/my.cnf</code>路径下找到这个文件并进行一些配置</strong></p>
+<div class="hljs"><pre><code class="hljs tiki"># For advice on how to change settings please see
+# http:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;5.7&#x2F;en&#x2F;server-configuration-defaults.html
+# *** DO NOT EDIT THIS FILE. It&#39;s a template which will be copied to the
+# *** default location during install, and will be replaced if you
+# *** upgrade to a newer version of MySQL.
+
+[mysqld]
+
+# Remove leading # and set to the amount of RAM for the most important data
+# cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.
+# innodb_buffer_pool_size &#x3D; 128M
+
+# Remove leading # to turn on a very important data integrity option: logging
+# changes to the binary log between backups.
+# log_bin
+
+# These are commonly set, remove the # and set as required.
+# basedir &#x3D; .....
+# datadir &#x3D; .....
+# port &#x3D; .....
+# server_id &#x3D; .....
+# socket &#x3D; .....
+
+# Remove leading # to set options mainly useful for reporting servers.
+# The server defaults are faster for transactions and fast SELECTs.
+# Adjust sizes as needed, experiment to find the optimal values.
+join_buffer_size &#x3D; 128M
+sort_buffer_size &#x3D; 2M
+read_rnd_buffer_size &#x3D; 2M 
+
+datadir&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql
+socket&#x3D;&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
+
+default-authentication-plugin&#x3D;mysql_native_password
+
+sql_mode&#x3D;NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</code></pre></div>
+
+<p><strong>如果你修改了配置文件它不会立刻生效必须重启MySQL服务</strong></p>
+<div class="hljs"><pre><code class="hljs bash">$ sudo systemctl restart mysqld.service</code></pre></div>
+
+
+
+<p>#　ＭySQL 常用命令</p>
+<blockquote>
+<p><strong>此章很重要</strong></p>
+</blockquote>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><ul>
+<li><strong>查看MySQL版本</strong></li>
+</ul>
+<p>使用命令行</p>
+<div class="hljs"><pre><code class="hljs bash">$ mysql --version</code></pre></div>
+
+<p>使用语句</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select version();</code></pre></div>
+
+<ul>
+<li><strong>查看所有数据库</strong></li>
+</ul>
+<p>查看你所有的数据库使用语句 <code>SHOW DATABASE</code></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; show databases;
++--------------------+
+| Database           |
++--------------------+
+| admin              |
+| auth               |
+| blog_test          |
+| cms                |
+| demo_db            |
+| django             |
+| exam               |
+| information_schema |
+| la_blog            |
+| mall               |
+| my_db              |
+| mysql              |
+| performance_schema |
+| photos             |
+| request_data       |
+| sign               |
+| sys                |
+| think_auth         |
+| thinkphp           |
+| tp_blog            |
+| typecho            |
+| v3                 |
+| video              |
++--------------------+
+23 rows in set (0.00 sec)</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>创建数据库</strong></li>
+</ul>
+<p><strong>使用<code>CREATE DATABASE 数据库名</code>创建数据库</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; create database note;
+Query OK, 1 row affected (0.00 sec)</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>选择数据库</strong></li>
+</ul>
+<p>使用<code>use 数据库名</code>打开一个数据库</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; use my_db
+Database changed</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>查看当前打开数据库</strong></li>
+</ul>
+<p>查看当前打开的数据库使用<code>select database();</code></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select database();
++------------+
+| database() |
++------------+
+| my_db      |
++------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>创建表</strong></li>
+</ul>
+<p>语法:</p>
+<div class="hljs"><pre><code class="hljs mysql">CREATE TABLE table_name (column_name column_type);</code></pre></div>
+
+<p>例:</p>
+<div class="hljs"><pre><code class="hljs mysql">create table stuinfo  (
+    id int,
+    name varchar(20));</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>查看所有的表</strong></li>
+</ul>
+<p>使用<code>show tables</code>查看当前数据库里所有的表</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; show tables;
++----------------+
+| Tables_in_note |
++----------------+
+| stuinfo        |
++----------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>查看表结构</strong></li>
+</ul>
+<p>使用<code>desc 表名</code>查看表的结构</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; desc stuinfo;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.02 sec)</code></pre></div>
+
+<hr>
+<ul>
+<li><strong>查看表数据</strong></li>
+</ul>
+<p>使用<code>select * from 表名</code>查看此表的数据</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select * from stuinfo;
+Empty set (0.00 sec)</code></pre></div>
+
+<p>可是当前表并没有数据</p>
+<hr>
+<ul>
+<li><strong>插入表数据</strong></li>
+</ul>
+<p>使用<code>insert into 表名 (xx)</code>往表里插入数据</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt;  insert into stuinfo (id, name) value (1,&#39;muxi_k&#39;);
+Query OK, 1 row affected (0.02 sec)</code></pre></div>
+
+<p>再来查看</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select * from stuinfo;
++------+--------+
+| id   | name   |
++------+--------+
+|    1 | muxi_k |
++------+--------+
+1 row in set (0.00 sec)</code></pre></div>
+
+
+
+<p>##　总结</p>
+<div class="hljs"><pre><code class="hljs mysql"> -- 查看版本
+ select version();
+ -- 查看所有数据库
+ show database;
+ -- 创建数据库
+ create database 数据库库名;
+ -- 打开数据库
+ use 库名;
+ -- 查看当前打开数据库
+ select database();
+ -- 创建表
+ create table 表名  (
+    字段名 类型,
+    字段名 类型(长度));
+-- 查看所有的表
+show tables
+-- 查看表结构
+desc 表名;
+-- 查看表数据
+select * from 表名;
+-- 插入表数据
+insert into 表名 (字段名) value (值);</code></pre></div>
+
+<h1 id="MySQL语法规范"><a href="#MySQL语法规范" class="headerlink" title="MySQL语法规范"></a>MySQL语法规范</h1><ol>
+<li><p>不区分大小写，但是建议关键字大写,表明,字段名小写</p>
+</li>
+<li><p>每条命令用分号结尾</p>
+</li>
+<li><p>每条命令根据需要，可以进行缩进或换行</p>
+</li>
+<li><p>注释</p>
+<ul>
+<li>单行注释:    <code># 注释内容</code></li>
+<li>单行注释: <code>-- 注释内容</code></li>
+<li>多行注释: <code>/*注释内容*/</code></li>
+</ul>
+</li>
+</ol>
+<h1 id="基础查询"><a href="#基础查询" class="headerlink" title="基础查询"></a>基础查询</h1><h2 id="开始-1"><a href="#开始-1" class="headerlink" title="开始"></a>开始</h2><ul>
+<li><strong>语法</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">select 查询列表</code></pre></div>
+
+<ul>
+<li><strong>特点</strong></li>
+</ul>
+<ol>
+<li><p>查询列表可以是:表中的字段，常量值，表达式，函数</p>
+</li>
+<li><p>查询的结果是一个虚拟的表格</p>
+<h2 id="查询字段"><a href="#查询字段" class="headerlink" title="查询字段"></a>查询字段</h2></li>
+</ol>
+<p>记得先打开数据库在进行查询</p>
+<ul>
+<li><strong>查询单个字段</strong></li>
+</ul>
+<p>使用<code>SELECT 字段名 FROM 表名</code>查询</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT &#96;job_id&#96; FROM jobs;
++------------+
+| job_id     |
++------------+
+| AC_ACCOUNT |
+| AC_MGR     |
+| AD_ASST    |
+| AD_PRES    |
+| AD_VP      |
+| FI_ACCOUNT |
+| FI_MGR     |
+| HR_REP     |
+| IT_PROG    |
+| MK_MAN     |
+| MK_REP     |
+| PR_REP     |
+| PU_CLERK   |
+| PU_MAN     |
+| SA_MAN     |
+| SA_REP     |
+| SH_CLERK   |
+| ST_CLERK   |
+| ST_MAN     |
++------------+
+19 rows in set (0.00 sec)</code></pre></div>
+
+<ul>
+<li><strong>查询表中的多个字段</strong></li>
+</ul>
+<p>使用<code>SELECT 字段名，字段名 FROM 表名</code>查询</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT &#96;last_name&#96;,&#96;salary&#96;,&#96;email&#96; FROM  employees;
++-------------+----------+----------+
+| last_name   | salary   | email    |
++-------------+----------+----------+
+| K_ing       | 24000.00 | SKING    |
+| Kochhar     | 17000.00 | NKOCHHAR |
+| De Haan     | 17000.00 | LDEHAAN  |
+| Hunold      |  9000.00 | AHUNOLD  |
+| Lorentz     |  4200.00 | DLORENTZ |
+| Greenberg   | 12000.00 | NGREENBE |
+| Faviet      |  9000.00 | DFAVIET  |
+| Chen        |  8200.00 | JCHEN    |
+| Sciarra     |  7700.00 | ISCIARRA |
+| Urman       |  7800.00 | JMURMAN  |
+| Gietz       |  8300.00 | WGIETZ   |
++-------------+----------+----------+
+... rows in set (0.00 sec)</code></pre></div>
+
+
+
+<ul>
+<li><strong>查询表中所有字段</strong></li>
+</ul>
+<p>使用<code>SELECT * FROM 表名</code>查询</p>
+<div class="hljs"><pre><code class="hljs mysql">-- * 代表所有
+mysql&gt; SELECT * FROM jobs;
++------------+---------------------------------+------------+------------+
+| job_id     | job_title                       | min_salary | max_salary |
++------------+---------------------------------+------------+------------+
+| AC_ACCOUNT | Public Accountant               |       4200 |       9000 |
+| AC_MGR     | Accounting Manager              |       8200 |      16000 |
+| AD_ASST    | Administration Assistant        |       3000 |       6000 |
+| AD_PRES    | President                       |      20000 |      40000 |
+| AD_VP      | Administration Vice President   |      15000 |      30000 |
+| FI_ACCOUNT | Accountant                      |       4200 |       9000 |
+| FI_MGR     | Finance Manager                 |       8200 |      16000 |
+| HR_REP     | Human Resources Representative  |       4000 |       9000 |
+| IT_PROG    | Programmer                      |       4000 |      10000 |
+| MK_MAN     | Marketing Manager               |       9000 |      15000 |
+| MK_REP     | Marketing Representative        |       4000 |       9000 |
+| PR_REP     | Public Relations Representative |       4500 |      10500 |
+| PU_CLERK   | Purchasing Clerk                |       2500 |       5500 |
+| PU_MAN     | Purchasing Manager              |       8000 |      15000 |
+| SA_MAN     | Sales Manager                   |      10000 |      20000 |
+| SA_REP     | Sales Representative            |       6000 |      12000 |
+| SH_CLERK   | Shipping Clerk                  |       2500 |       5500 |
+| ST_CLERK   | Stock Clerk                     |       2000 |       5000 |
+| ST_MAN     | Stock Manager                   |       5500 |       8500 |
++------------+---------------------------------+------------+------------+
+19 rows in set (0.00 sec)</code></pre></div>
+
+<h2 id="查询-常量-表达式-函数"><a href="#查询-常量-表达式-函数" class="headerlink" title="查询 常量/表达式/函数"></a>查询 常量/表达式/函数</h2><ul>
+<li><strong>查询常量</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select &#39;joy&#39;;
++-----+
+| joy |
++-----+
+| joy |
++-----+
+1 row in set (0.01 sec)
+
+mysql&gt; select 100;
++-----+
+| 100 |
++-----+
+| 100 |
++-----+
+1 row in set (0.00 sec)</code></pre></div>
+
+<ul>
+<li><strong>查询表达式</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">SELECT 100%99;</code></pre></div>
+
+<ul>
+<li><strong>查询函数</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">SELECT VERESION();</code></pre></div>
+
+<h2 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a>起别名</h2><ul>
+<li><strong>好处</strong><ul>
+<li>便于理解</li>
+<li>如果要查询的字段有重名的情况可以使用别名区分</li>
+</ul>
+</li>
+</ul>
+<p>###　方式１</p>
+<p>使用AS关键字</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT 100 &#x2F; 10 AS 结果;
++---------+
+| 结果     |
++---------+
+| 10.0000 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs mysql">
+mysql&gt; SELECT email AS 邮箱  FROM employees ;
++----------+
+| 邮箱      |
++----------+
+| SKING    |
+| NKOCHHAR |
+| LDEHAAN  |
+| AHUNOLD  |
+| HBAER    |
+| SHIGGINS |
+| WGIETZ   |
++----------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><p>使用空格直接写</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT email 邮箱  FROM employees ;   
++----------+
+| 邮箱      |
++----------+
+| SKING    |
+| NKOCHHAR |
+| LDEHAAN  |
+| AHUNOLD  |
+| BERNST   |
+| DAUSTIN  |
+| VPATABAL |
+| SHIGGINS |
+| WGIETZ   |
++----------+
+107 rows in set (0.01 sec)</code></pre></div>
+
+<p>###　案例</p>
+<p>查询　salary  显示结果为　out put</p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT salary as &quot;out put&quot; FROM employess;</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT salary as &quot;out put&quot; FROM employees;
++----------+
+| out put  |
++----------+
+| 24000.00 |
+| 17000.00 |
+| 12000.00 |
+|  9000.00 |
+|  8200.00 |
+|  8300.00 |
++----------+
+107 rows in set (0.01 sec)</code></pre></div>
+
+<h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p><strong>案例：查询员工表中涉及到的所有的部门编号</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT department_id FROM employees;
+mysql&gt; SELECT department_id FROM employees;
++---------------+
+| department_id |
++---------------+
+|          NULL |
+|            10 |
+|            20 |
+|            20 |
+|            30 |
+|            30 |
+|            30 |
+|            30 |
+|            40 |
+|            50 |
+|            50 |
+|            50 |
+|            50 |
+|            50 |
+|            50 |
+|            50 |
+|            50 |
+|            60 |
+|            60 |
+|            60 |
+|            60 |
+|            60 |
+|            70 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            80 |
+|            90 |
+|            90 |
+|            90 |
+|           100 |
+|           100 |
+|           100 |
+|           100 |
+|           100 |
+|           100 |
+|           110 |
+|           110 |
++---------------+
+... rows in set (0.01 sec)</code></pre></div>
+
+<div class="hljs"><pre><code class="hljs mysql">-- 使用DISTINCT关键字去重
+mysql&gt; SELECT DISTINCT department_id FROM employees;
++---------------+
+| department_id |
++---------------+
+|          NULL |
+|            10 |
+|            20 |
+|            30 |
+|            40 |
+|            50 |
+|            60 |
+|            70 |
+|            80 |
+|            90 |
+|           100 |
+|           110 |
++---------------+
+12 rows in set (0.00 sec)</code></pre></div>
+
+
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><ul>
+<li><code>+</code><strong>号的作用</strong></li>
+</ul>
+<p><strong>MySQL中的<code>+</code>号只有一个功能: 运算符，不具有拼接字符串的功能</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT 1+4; -- success 
+SELECT &#39;1&#39;+1 -- success
+SELECT &#39;a&#39;+&#39;b&#39; -- warning</code></pre></div>
+
+
+
+<p>案例: 查询员工名和姓，并显示姓名</p>
+<div class="hljs"><pre><code class="hljs mysql">-- 使用CONCAT()函数拼接字符串
+SELECT CONCAT(last_name,first_name) AS 姓名 FROM employees; 
+
+
+mysql&gt; SELECT CONCAT(last_name,first_name) AS 姓名 FROM employees; 
++------------------+
+| 姓名             |
++------------------+
+| K_ingSteven      |
+| KochharNeena     |
+| De HaanLex       |
+| HunoldAlexander  |
+| ErnstBruce       |
+| OlsonTJ          |
+| MallinJason      |
+| RogersMichael    |
+| GeeKi            |
+| HigginsShelley   |
+| GietzWilliam     |
++------------------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+<p><strong>注意</strong></p>
+<p>NULL和任何拼接都为NULL</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT concat(job_id,commission_pct) AS out_put FROM employees;      
++------------+
+| out_put    |
++------------+
+| NULL       |
+| NULL       |
+| NULL       |
+| NULL       |
+| NULL       |
+| NULL       |
+| NULL       |
++------------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+
+
+<p>我们可以使用函数IFNULL判断是否为NULL</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT CONCAT(job_id,IFNULL(commission_pct,0)) AS out_put FROM employees;   
++----------------+
+| out_put        |
++----------------+
+| AD_VP0.00      |
+| IT_PROG0.00    |
+| IT_PROG0.00    |
+| ST_CLERK0.00   |
+| ST_CLERK0.00   |
+| ST_CLERK0.00   |
+| SA_MAN0.40     |
+| SA_MAN0.30     |
+| SA_REP0.20     |
+| SA_REP0.20     |
+| SA_REP0.15     |
+| SA_REP0.10     |
+| SH_CLERK0.00   |
+| SH_CLERK0.00   |
+| HR_REP0.00     |
+| PR_REP0.00     |
+| AC_MGR0.00     |
+| AC_ACCOUNT0.00 |
++----------------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+
+
+
+
+<h1 id="DQL条件查询"><a href="#DQL条件查询" class="headerlink" title="DQL条件查询"></a>DQL条件查询</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p><strong>语法</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">select
+    查询列表
+from 
+    表名
+where
+    筛选条件</code></pre></div>
+
+
+</li>
+</ul>
+<ul>
+<li><p>分类</p>
+<ul>
+<li><p>按条件表达式筛选</p>
+<ul>
+<li>条件运算符: <code>&gt; &lt; = != &lt;&gt; &gt;= &lt;=</code></li>
+</ul>
+</li>
+<li><p>按逻辑表达式筛选</p>
+<ul>
+<li><p>逻辑运算符:</p>
+<ul>
+<li><code>&amp;&amp; and</code>两个条件都为 true 则结果为 true 反之 false</li>
+<li><code>|| or</code>只要有一个条件为 true 则结果为 true 反之 false</li>
+<li><code>! not</code>如果连接的条件为 true 则结果为 false 反之 true</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模糊查询</p>
+<ul>
+<li><code>like</code></li>
+<li><code>between and</code></li>
+<li><code>in</code></li>
+<li><code>is null</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="条件运算符查询"><a href="#条件运算符查询" class="headerlink" title="条件运算符查询"></a>条件运算符查询</h2><ul>
+<li><p><strong>案例一、 查询工资大于12000</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name 姓, salary 工资 FROM employees WHERE salary &gt; 12000;
++-----------+----------+
+| 姓        | 工资     |
++-----------+----------+
+| K_ing     | 24000.00 |
+| Kochhar   | 17000.00 |
+| De Haan   | 17000.00 |
+| Russell   | 14000.00 |
+| Partners  | 13500.00 |
+| Hartstein | 13000.00 |
++-----------+----------+
+6 rows in set (0.00 sec)</code></pre></div>
+</li>
+<li><p><strong>案例二、查询部门编号不等于90号的员工名和部门编号</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name, department_id FROM employees WHERE department_id &lt;&gt; 90;
++-------------+---------------+
+| last_name   | department_id |
++-------------+---------------+
+| Hunold      |            60 |
+| Ernst       |            60 |
+| Chen        |           100 |
+| Sciarra     |           100 |
+| Urman       |           100 |
+| Popp        |           100 |
+| Higgins     |           110 |
+| Gietz       |           110 |
++-------------+---------------+
+103 rows in set (0.00 sec)</code></pre></div>
+
+</li>
+</ul>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><ul>
+<li><strong>案例一、 查询工资大于10000 小于12000的员工名</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT first_name FROM employees WHERE salary&gt;&#x3D;10000 AND salary &lt;&#x3D; 12000;
++------------+
+| first_name |
++------------+
+| Nancy      |
+| Den        |
+| Alberto    |
+| Gerald     |
+| Eleni      |
+| Peter      |
+| Janette    |
+| Clara      |
+| Lisa       |
+| Harrison   |
+| Ellen      |
+| Hermann    |
+| Shelley    |
++------------+
+13 rows in set (0.00 sec)</code></pre></div>
+
+<ul>
+<li><strong>案例二、 查询部门编号在90到110之间或者工资 大于12000的员工名</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select first_name from employees where department_id&gt;&#x3D;90 and department_id &lt;&#x3D; 110 or salary &gt; 12000;
++-------------+
+| first_name  |
++-------------+
+| Steven      |
+| Neena       |
+| Lex         |
+| Nancy       |
+| Daniel      |
+| John        |
+| Ismael      |
+| Jose Manuel |
+| Luis        |
+| John        |
+| Karen       |
+| Michael     |
+| Shelley     |
+| William     |
++-------------+
+14 rows in set (0.00 sec)</code></pre></div>
+
+
+
+<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><h3 id="1-like"><a href="#1-like" class="headerlink" title="1. like"></a>1. like</h3><p>特点: </p>
+<ol>
+<li>一般配合通配符使用<ul>
+<li>通配符 : <ul>
+<li><code>%</code> 代表任意多个字符</li>
+<li><code>_</code> 代表任意单个字符 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p><strong>案例1: 查询员工名带’a’字符的员工名,不区分大小写</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name FROM employees WHERE last_name LIKE &#39;%a%&#39;;
++------------+
+| last_name  |
++------------+
+| Kochhar    |
+| De Haan    |
+| Austin     |
+| Pataballa  |
+| Urman      |
+| Raphaely   |
+| Baida      |
+| Baer       |
++------------+
+56 rows in set (0.01 sec)</code></pre></div>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><strong>案例2:查询员工名第三个字符为<code>n</code>，地五个为<code>l</code>的员工名</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name FROM employees WHERE last_name LIKE &#39;__n_l%&#39;;
++-----------+
+| last_name |
++-----------+
+| Hunold    |
++-----------+
+1 row in set (0.00 sec)</code></pre></div>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p><strong>案例2:查询员工名第二个字符为<code>_</code>的员工名</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">-- 用‘&#x2F;’转义
+
+mysql&gt; SELECT last_name FROM employees WHERE last_name LIKE &#39;_\_%&#39;;
++-----------+
+| last_name |
++-----------+
+| K_ing     |
+| K_ing     |
++-----------+
+2 rows in set (0.00 sec)
+
+-- 或者使用ESCAPE
+
+mysql&gt; SELECT last_name FROM employees WHERE last_name LIKE &#39;_$_%&#39; ESCAPE &#39;$&#39;;
++-----------+
+| last_name |
++-----------+
+| K_ing     |
+| K_ing     |
++-----------+
+2 rows in set (0.00 sec)</code></pre></div>
+
+
+</li>
+</ul>
+<p>翻译: Escape 转义 换码 </p>
+<h3 id="2-between-and"><a href="#2-between-and" class="headerlink" title="2.between and"></a>2.between and</h3><blockquote>
+<ol>
+<li>包含between and 可以提高语句简洁度</li>
+<li>包含两个临界值</li>
+<li>两个临界值不能调换顺序等价于 <code>&gt;= and &lt;=</code></li>
+</ol>
+</blockquote>
+<ul>
+<li><p><strong>案例 1: 查询员工编号在 100 到 120 之间的员工编号</strong></p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT employee_id FROM employees WHERE employee_id BETWEEN 100 AND 120;
++-------------+
+| employee_id |
++-------------+
+|         100 |
+|         101 |
+|         102 |
+|         103 |
+|         104 |
+|         116 |
+|         117 |
+|         118 |
+|         119 |
+|         120 |
++-------------+
+21 rows in set (0.00 sec)</code></pre></div>
+
+
+</li>
+</ul>
+<p>翻译: between and在什么什么之间</p>
+<h3 id="3-in"><a href="#3-in" class="headerlink" title="3.in"></a>3.in</h3><blockquote>
+<p>in含义: 判断某个字段的值是否是否属于in列表的一项<br>特点: </p>
+<div class="hljs"><pre><code>1. in列表的类型必须统一 或兼容 `123` = 123</code></pre></div></blockquote>
+<ul>
+<li>**案例1：查询员工的工种编号是IT_PROG AD_VP AD_PRES中的一个 的员工名和工种编号</li>
+</ul>
+<h3 id="4-is-null"><a href="#4-is-null" class="headerlink" title="4.is null"></a>4.is null</h3><blockquote>
+<p>注意 : = 或 &lt;&gt; 不能判断NULL值</p>
+</blockquote>
+<ul>
+<li><strong>案例:查询没有奖金的员工名和奖金率</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">-- IS NULL
+mysql&gt; SELECT last_name, commission_pct FROM employees WHERE commission_pct IS NULL; 
++-------------+----------------+
+| last_name   | commission_pct |
++-------------+----------------+
+| K_ing       |           NULL |
+| Kochhar     |           NULL |
+| De Haan     |           NULL |
+| Hunold      |           NULL |
+| Ernst       |           NULL |
+| Baer        |           NULL |
+| Higgins     |           NULL |
+| Gietz       |           NULL |
++-------------+----------------+
+72 rows in set (0.00 sec)</code></pre></div>
+
+<ul>
+<li><strong>案例:查询有奖金的员工名和奖金率</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name, commission_pct FROM employees WHERE commission_pct IS NOT NULL;    
++------------+----------------+
+| last_name  | commission_pct |
++------------+----------------+
+| Russell    |           0.40 |
+| Partners   |           0.30 |
+| Errazuriz  |           0.30 |
+| Hutton     |           0.25 |
+| Taylor     |           0.20 |
+| Livingston |           0.20 |
+| Grant      |           0.15 |
+| Johnson    |           0.10 |
++------------+----------------+
+35 rows in set (0.00 sec)</code></pre></div>
+
+<h3 id="安全等于-lt-gt"><a href="#安全等于-lt-gt" class="headerlink" title="安全等于&lt;=&gt;"></a>安全等于&lt;=&gt;</h3><ul>
+<li><strong>案例:查询没有奖金的员工名和奖金率</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">-- &lt;&#x3D;&gt; 可以判断NULL值也可以判断普通值
+mysql&gt; SELECT last_name, commission_pct FROM employees WHERE commission_pct &lt;&#x3D;&gt; NULL;      
++-------------+----------------+
+| last_name   | commission_pct |
++-------------+----------------+
+| K_ing       |           NULL |
+| Kochhar     |           NULL |
+| De Haan     |           NULL |
+| Hunold      |           NULL |
+| Ernst       |           NULL |
+| Austin      |           NULL |
+| Pataballa   |           NULL |
+| Lorentz     |           NULL |
+| Greenberg   |           NULL |
+| Baer        |           NULL |
+| Higgins     |           NULL |
+| Gietz       |           NULL |
++-------------+----------------+
+72 rows in set (0.00 sec)</code></pre></div>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><ol>
+<li><p>查询员工号为176的员工的姓名和部门号和年薪</p>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; SELECT last_name,department_id,salary*12*(1+IFNULL(commission_pct,0)) 年薪 FROM employees;
++-------------+---------------+-----------+
+| last_name   | department_id | 年薪      |
++-------------+---------------+-----------+
+| K_ing       |            90 | 288000.00 |
+| Kochhar     |            90 | 204000.00 |
+| De Haan     |            90 | 204000.00 |
+| Hunold      |            60 | 108000.00 |
+| Ernst       |            60 |  72000.00 |
+| Hartstein   |            20 | 156000.00 |
+| Fay         |            20 |  72000.00 |
+| Mavris      |            40 |  78000.00 |
+| Baer        |            70 | 120000.00 |
+| Higgins     |           110 | 144000.00 |
+| Gietz       |           110 |  99600.00 |
++-------------+---------------+-----------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>查询没有奖金，且工资小于18000的salary ，last_name</p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT
+	salary,
+	last_name 
+FROM
+	employees 
+WHERE
+	commission_pct IS NULL 
+	AND salary &lt; 18000;</code></pre></div>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>查询job_id不为<code>IT</code>或者工资为12000的员工信息</p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT
+	* 
+FROM
+	employees 
+WHERE
+	job_id &lt;&gt; &#39;IT&#39; 
+	OR salary &#x3D; 12000</code></pre></div>
+</li>
+<li><p>查询部门departments的表结构;</p>
+<div class="hljs"><pre><code class="hljs mysql">DESC departments;</code></pre></div>
+</li>
+<li><p>查询部门departments表中涉及到哪些位置编号</p>
+<div class="hljs"><pre><code class="hljs mysql">SELECT DISTINCT
+	location_id 
+FROM
+	departments;</code></pre></div>
+</li>
+<li><p>经典面试题</p>
+<div class="hljs"><pre><code class="hljs mysql">-- 试问 select * from employees 和 select * from where commission_pct like &quot;%%&quot; and   last_name &quot;%%&quot;;结果是否一致请说明原因
+-- 不一样！如果判断的字段有NULL值</code></pre></div>
+
+
+
+</li>
+</ol>
+<h1 id="复习"><a href="#复习" class="headerlink" title="复习"></a>复习</h1><h2 id="数据库相关概念-1"><a href="#数据库相关概念-1" class="headerlink" title="数据库相关概念"></a>数据库相关概念</h2><p>###　一、数据库好处</p>
+<ol>
+<li>持久化数据到本地</li>
+<li>结构化查询</li>
+</ol>
+<h3 id="二、数据库的常见概念"><a href="#二、数据库的常见概念" class="headerlink" title="二、数据库的常见概念"></a>二、数据库的常见概念</h3><ol>
+<li>DB：数据库</li>
+<li>DBMS：数据库管理系统，又称为数据库软件或数据库产品，用于创建或管理DB</li>
+<li>SQL：结构化查询语言</li>
+</ol>
+<h3 id="三、数据库存储数据的特点"><a href="#三、数据库存储数据的特点" class="headerlink" title="三、数据库存储数据的特点"></a>三、数据库存储数据的特点</h3><ol>
+<li>数据存放到表中，然后表被放到库中</li>
+<li>一个库中可以有多张表， 每张表具有唯一的表名用来标识自己</li>
+<li>表中的有一个或者多个列，又称为<code>字段</code></li>
+<li>表中的每一行数据，相当于对象</li>
+</ol>
+<h3 id="四、常见的数据库管理系统"><a href="#四、常见的数据库管理系统" class="headerlink" title="四、常见的数据库管理系统"></a>四、常见的数据库管理系统</h3><ol>
+<li>MySQL</li>
+<li>Oracle</li>
+<li>db2</li>
+<li>sqlserver</li>
+</ol>
+<p>##　ＭySQL 的介绍</p>
+<h3 id="一、MySQL的背景"><a href="#一、MySQL的背景" class="headerlink" title="一、MySQL的背景"></a>一、MySQL的背景</h3><div class="hljs"><pre><code>1. 前身属于瑞典的一家公司，MySQL AB
+
+2. 2008年被sun公司收购
+
+3. 2009年sun被oracle收购</code></pre></div><h3 id="二、MySQL的优点"><a href="#二、MySQL的优点" class="headerlink" title="二、MySQL的优点"></a>二、MySQL的优点</h3><ol>
+<li>开源，免费，成本低</li>
+<li>性能高，移植性好</li>
+<li>体积小，便于安装</li>
+</ol>
+<h3 id="三、MySQL服务启动停止"><a href="#三、MySQL服务启动停止" class="headerlink" title="三、MySQL服务启动停止"></a>三、MySQL服务启动停止</h3><ul>
+<li><p>Linux(manjaro) </p>
+<div class="hljs"><pre><code class="hljs bash">$ systemctl start mysqld <span class="hljs-comment"># 启动</span>
+$ systemctl stop mysqld <span class="hljs-comment"># 停止</span></code></pre></div>
+</li>
+<li><p>Windows(Administrator)</p>
+<div class="hljs"><pre><code class="hljs bash">net start mysqld :: 启动
+net stop mysqld  :: 停止</code></pre></div>
+
+
+
+</li>
+</ul>
+<h3 id="四、MySQL服务登录退出"><a href="#四、MySQL服务登录退出" class="headerlink" title="四、MySQL服务登录退出"></a>四、MySQL服务登录退出</h3><div class="hljs"><pre><code class="hljs bash">$ mysql [-h主机名 -P端口号] -u 用户名 -p密码</code></pre></div>
+
+
+
+<h2 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h2><h3 id="基础查询-1"><a href="#基础查询-1" class="headerlink" title="基础查询"></a>基础查询</h3><ul>
+<li><p>语法:</p>
+<div class="hljs"><pre><code class="hljs mysql">select 查询列表　from 表名;</code></pre></div>
+</li>
+<li><p>特点:</p>
+<ol>
+<li>查询列表可以是字段、常量、表达式、函数、也可以是多个</li>
+<li>查询结果是一个虚拟的表</li>
+</ol>
+</li>
+<li><p>实例</p>
+<ol>
+<li><p>查询单个字段</p>
+<div class="hljs"><pre><code class="hljs mysql">select 字段名 from 表名;</code></pre></div>
+</li>
+<li><p>查询多个字段</p>
+<div class="hljs"><pre><code class="hljs mysql">select 字段名，字段名 from 表名;</code></pre></div>
+</li>
+<li><p>查询多个字段</p>
+<div class="hljs"><pre><code class="hljs mysql">select * from 表名;</code></pre></div>
+</li>
+<li><p>查询常量 </p>
+<div class="hljs"><pre><code class="hljs mysql">select 常量值; -- 字符型|日期型常量值要用引号引起来，数值型不需要</code></pre></div>
+</li>
+<li><p>查询函数</p>
+<div class="hljs"><pre><code class="hljs mysql">select 函数名(实参列表);</code></pre></div>
+</li>
+<li><p>查询表达式</p>
+</li>
+</ol>
+<div class="hljs"><pre><code class="hljs mysql">select 1+1;</code></pre></div>
+
+<ol start="7">
+<li><p>起别名</p>
+<ol>
+<li><p><code>AS</code></p>
+<div class="hljs"><pre><code class="hljs mysql">select 字段名 as 别名 from 表名;</code></pre></div>
+</li>
+<li><p><code>空格</code></p>
+<div class="hljs"><pre><code class="hljs mysql">select 字段名 别名 from 表名;</code></pre></div>
+
+
+
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<ol start="8">
+<li><p>去重</p>
+<div class="hljs"><pre><code class="hljs mysql">select distinct 字段名 from 表名;</code></pre></div>
+</li>
+<li><p><code>+</code></p>
+<p>作用：加法运算</p>
+<div class="hljs"><pre><code class="hljs mysql">select  1+1; -- succees 2
+select &#39;1&#39;1; -- succees 2
+select &#39;a&#39;+1; -- error 1
+select null + 1 -- error null</code></pre></div>
+</li>
+<li><p>[补充] concat()</p>
+<p>功能：拼接字符串</p>
+<div class="hljs"><pre><code class="hljs mysql">select concat(&#39;str1&#39;,&#39;str2&#39;);</code></pre></div>
+</li>
+<li><p>[补充] ifnull()</p>
+<p>功能：判断某个字段的值是否为null 返回指定值，否则返回原本值</p>
+<div class="hljs"><pre><code class="hljs mysql">select ifnull(null,0)</code></pre></div>
+</li>
+<li><p>[补充] ifnull()</p>
+<p>功能：判断某个字段的值是否为null 返回bool值</p>
+<div class="hljs"><pre><code class="hljs mysql">select isnull(null)</code></pre></div>
+
+
+
+</li>
+</ol>
+<h3 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h3><ul>
+<li><p>语法:</p>
+<div class="hljs"><pre><code class="hljs mysql">select 字段名 from 表名 where 条件;</code></pre></div>
+
+</li>
+</ul>
+<ul>
+<li><p>分类</p>
+<ol>
+<li><p>简单条件运算符</p>
+<p><code>&gt;</code>,<code>&lt;</code>,<code>=</code>,<code>!=</code>,<code>&lt;&gt;</code>, <code>&lt;=&gt;</code>,<code>&gt;=</code>,<code>&lt;=</code></p>
+</li>
+<li><p>逻辑运算符</p>
+<p><code>&amp;&amp; and</code>,<code>|| or</code>,<code>! not</code></p>
+</li>
+<li><p>模糊查询</p>
+<p><code>like</code>, <code>between and</code> ,<code>in</code> </p>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h1><ul>
+<li><p><strong>概念: 将一段逻辑代码封装，对外暴露函数名</strong></p>
+</li>
+<li><p><strong>好处：1. 隐藏实现细节，2.提高代码复用性</strong></p>
+</li>
+<li><p><strong>语法： <code>select 函数名（实参）</code></strong></p>
+</li>
+<li><p><strong>特点：</strong> </p>
+<ol>
+<li><strong>叫什么(函数名)</strong></li>
+<li><strong>干什么(函数功能)</strong></li>
+</ol>
+</li>
+<li><p><strong>分类：</strong></p>
+<ol>
+<li><p><strong>单行函数</strong></p>
+<p><strong>如: concat(), length(), ifnull()</strong></p>
+</li>
+<li><p><strong>分组函数</strong></p>
+<p><strong>功能：做统计使用，又称为统计函数、聚合函数、组函数</strong></p>
+</li>
+</ol>
+</li>
+<li><p><strong>学习目标：</strong></p>
+<ul>
+<li><strong>字符函数</strong></li>
+<li><strong>数学函数</strong></li>
+<li><strong>日期函数</strong></li>
+<li><strong>其他函数</strong></li>
+<li><strong>流程控制函数</strong></li>
+</ul>
+</li>
+</ul>
+<p>##　字符函数</p>
+<h4 id="length-返回字符的字节长度"><a href="#length-返回字符的字节长度" class="headerlink" title="length()　返回字符的字节长度"></a>length()　返回字符的字节长度</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select length(&#39;你好&#39;);
++------------------+
+| length(&#39;你好&#39;)   |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="concat-拼接字符串"><a href="#concat-拼接字符串" class="headerlink" title="concat() 拼接字符串"></a>concat() 拼接字符串</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select concat(&#39;你好&#39;,&#39;世界&#39;);
++---------------------------+
+| concat(&#39;你好&#39;,&#39;世界&#39;)     |
++---------------------------+
+| 你好世界                  |
++---------------------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="upper-小写转大写-lower-大写转小写"><a href="#upper-小写转大写-lower-大写转小写" class="headerlink" title="upper() 小写转大写,lower() 大写转小写"></a>upper() 小写转大写,lower() 大写转小写</h4><div class="hljs"><pre><code class="hljs mysql">-- 小写转大写
+mysql&gt; select upper(&#39;Heelo&#39;);
++----------------+
+| upper(&#39;Heelo&#39;) |
++----------------+
+| HEELO          |
++----------------+
+1 row in set (0.01 sec)
+
+-- --------------------------------------
+
+-- 大写转小写
+mysql&gt; select lower(&#39;Heelo&#39;);
++----------------+
+| lower(&#39;Heelo&#39;) |
++----------------+
+| heelo          |
++----------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="substr-、substring-截取字符串"><a href="#substr-、substring-截取字符串" class="headerlink" title="substr()、substring() 截取字符串"></a>substr()、substring() 截取字符串</h4><div class="hljs"><pre><code class="hljs mysql">-- 索引从1开始
+mysql&gt; select substr(&#39;Hello World!&#39;,6);
++--------------------------+
+| substr(&#39;Hello World!&#39;,6) |
++--------------------------+
+|  World!                  |
++--------------------------+
+1 row in set (0.00 sec)
+
+-- substring 与 substr一致
+mysql&gt; select substring(&#39;Hello World!&#39;,6);
++-----------------------------+
+| substring(&#39;Hello World!&#39;,6) |
++-----------------------------+
+|  World!                     |
++-----------------------------+
+1 row in set (0.00 sec)
+
+-- 可以用两个参数作为索引
+mysql&gt; select substring(&#39;Hello World!&#39;,-6,5);
++--------------------------------+
+| substring(&#39;Hello World!&#39;,-6,5) |
++--------------------------------+
+| World                          |
++--------------------------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<ul>
+<li><strong>案例: 姓名中首字母大写，其他字符小写</strong></li>
+</ul>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select concat(upper(substr(last_name,1,1)),lower(substr(last_name,2))) out_put from employees; 
++-------------+
+| out_put     |
++-------------+
+| K_ing       |
+| Kochhar     |
+| De haan     |
+| Mavris      |
+| Baer        |
+| Higgins     |
+| Gietz       |
++-------------+
+107 rows in set (0.01 sec)</code></pre></div>
+
+<h4 id="instr-返回起始索引-default-0"><a href="#instr-返回起始索引-default-0" class="headerlink" title="instr() 返回起始索引 default 0"></a>instr() 返回起始索引 default 0</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select instr(&#39;Hello World!&#39;,&#39;W&#39;) as output;
++--------+
+| output |
++--------+
+|      7 |
++--------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="trim-去除首位空格-或-字符"><a href="#trim-去除首位空格-或-字符" class="headerlink" title="trim() 去除首位空格 或 字符"></a>trim() 去除首位空格 或 字符</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select trim(&#39;  Hello &#39;) as out_put;
++---------+
+| out_put |
++---------+
+| Hello   |
++---------+
+1 row in set (0.00 sec)
+
+mysql&gt; select trim(&#39;a&#39; from &#39;aaaHelloaaaaaa&#39;) as out_put;
++---------+
+| out_put |
++---------+
+| Hello   |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="lpad-用指定字符左填充指定长度"><a href="#lpad-用指定字符左填充指定长度" class="headerlink" title="lpad() 用指定字符左填充指定长度"></a>lpad() 用指定字符左填充指定长度</h4><div class="hljs"><pre><code class="hljs mysql">-- 超过原始字符长度才会填充
+mysql&gt; select lpad(&#39;Hello&#39;, 8, &#39;*&#39;) as out_put;
++----------+
+| out_put  |
++----------+
+| ***Hello |
++----------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="rpad-用指定字符右填充指定长度"><a href="#rpad-用指定字符右填充指定长度" class="headerlink" title="rpad() 用指定字符右填充指定长度"></a>rpad() 用指定字符右填充指定长度</h4><div class="hljs"><pre><code class="hljs mysql">-- 超过原始字符长度才会填充
+mysql&gt; select rpad(&#39;Hello&#39;, 8, &#39;*&#39;) as out_put;
++----------+
+| out_put  |
++----------+
+| Hello*** |
++----------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h4 id="replace-替换"><a href="#replace-替换" class="headerlink" title="replace() 替换"></a>replace() 替换</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select replace(&#39;Hello World!&#39;, &#39;World&#39;, &#39;MySQL&#39;) as out_put;
++--------------+
+| out_put      |
++--------------+
+| Hello MySQL! |
++--------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+
+
+<h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><h4 id="round-四舍五入"><a href="#round-四舍五入" class="headerlink" title="round() 四舍五入"></a>round() 四舍五入</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select round(1.63) as out_put;
++---------+
+| out_put |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&gt; select round(1.23) as out_put;
++---------+
+| out_put |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
+--  or 保留2位
+mysql&gt; select round(1.235,2) as out_put;
++---------+
+| out_put |
++---------+
+|    1.24 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+
+<h3 id="ceil-向上取整-返回-gt-该参数的最小整数"><a href="#ceil-向上取整-返回-gt-该参数的最小整数" class="headerlink" title="ceil() 向上取整,返回&gt;= 该参数的最小整数"></a>ceil() 向上取整,返回&gt;= 该参数的最小整数</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select ceil(1.1) as out_put;
++---------+
+| out_put |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="floor-向下取整-返回-lt-该参数的最小整数"><a href="#floor-向下取整-返回-lt-该参数的最小整数" class="headerlink" title="floor 向下取整 返回&lt;= 该参数的最小整数"></a>floor 向下取整 返回&lt;= 该参数的最小整数</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select floor(2.11) as out_put;
++---------+
+| out_put |
++---------+
+|       2 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="truncate-截断"><a href="#truncate-截断" class="headerlink" title="truncate 截断"></a>truncate 截断</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select truncate(1.123,2) as out_put;
++---------+
+| out_put |
++---------+
+|    1.12 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="mod-取余"><a href="#mod-取余" class="headerlink" title="mod()取余"></a>mod()取余</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select mod(10,3) as out_put;
++---------+
+| out_put |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h2 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数"></a>日期函数</h2><h3 id="now-返回当前系统日期-时间"><a href="#now-返回当前系统日期-时间" class="headerlink" title="now() 返回当前系统日期+时间"></a>now() 返回当前系统日期+时间</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select now() as out_put;
++---------------------+
+| out_put             |
++---------------------+
+| 2020-03-28 23:12:17 |
++---------------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="curdate-返回当前系统日期不包含时间"><a href="#curdate-返回当前系统日期不包含时间" class="headerlink" title="curdate() 返回当前系统日期不包含时间"></a>curdate() 返回当前系统日期不包含时间</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select curdate() as out_put;
++------------+
+| out_put    |
++------------+
+| 2020-03-28 |
++------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="curtime-返回当前时间，不包含日期"><a href="#curtime-返回当前时间，不包含日期" class="headerlink" title="curtime() 返回当前时间，不包含日期"></a>curtime() 返回当前时间，不包含日期</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select curtime() as out_put;
++----------+
+| out_put  |
++----------+
+| 23:13:53 |
++----------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="可以获取指定部分，年月，日，小时，分钟，秒"><a href="#可以获取指定部分，年月，日，小时，分钟，秒" class="headerlink" title="可以获取指定部分，年月，日，小时，分钟，秒"></a>可以获取指定部分，年月，日，小时，分钟，秒</h3><div class="hljs"><pre><code class="hljs mysql">-- year() 年
+
+mysql&gt; select year(now()) as out_put;
++---------+
+| out_put |
++---------+
+|    2020 |
++---------+
+1 row in set (0.00 sec)
+
+-- month() 月
+
+mysql&gt; select month(now()) as out_put;
++---------+
+| out_put |
++---------+
+|       3 |
++---------+
+1 row in set (0.00 sec)
+
+-- day() 日
+mysql&gt; select day(now()) as out_put;
++---------+
+| out_put |
++---------+
+|      28 |
++---------+
+1 row in set (0.00 sec)
+
+
+-- ...</code></pre></div>
+
+<h3 id="str-to-date-将日期格式的字符转换成指定格式的日期"><a href="#str-to-date-将日期格式的字符转换成指定格式的日期" class="headerlink" title="str_to_date 将日期格式的字符转换成指定格式的日期"></a>str_to_date 将日期格式的字符转换成指定格式的日期</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select str_to_date(&#39;3-28-2020&#39;,&#39;%m-%d-%Y&#39;) as out_put;                                           
++------------+
+| out_put    |
++------------+
+| 2020-03-28 |
++------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+
+
+<table>
+<thead>
+<tr>
+<th align="left">#</th>
+<th align="left">格式符</th>
+<th align="left">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">%Y</td>
+<td align="left">4位的年份</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">%y</td>
+<td align="left">两位的年份</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">%m</td>
+<td align="left">月份  (01,02…11,12)</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">%c</td>
+<td align="left">月份  (1,2…11,12)</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">%d</td>
+<td align="left">日           (01,02…)</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">%H</td>
+<td align="left">小时     (24小时制)</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">%h</td>
+<td align="left">小时     (12小时制)</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">%i</td>
+<td align="left">分钟 (00,01,02,59)</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">%s</td>
+<td align="left">秒    (00,01,02,59)</td>
+</tr>
+</tbody></table>
+<h3 id="date-format-将日期转换成字符"><a href="#date-format-将日期转换成字符" class="headerlink" title="date_format() 将日期转换成字符"></a>date_format() 将日期转换成字符</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select date_format(now(),&#39;%y年%m月%d日&#39;) as out_put;
++-----------------+
+| out_put         |
++-----------------+
+| 20年03月28日     |
++-----------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><h3 id="version-版本信息"><a href="#version-版本信息" class="headerlink" title="version() 版本信息"></a>version() 版本信息</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select version() as out_put;
++---------+
+| out_put |
++---------+
+| 8.0.19  |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="database-查看当前打开的数据库"><a href="#database-查看当前打开的数据库" class="headerlink" title="database() 查看当前打开的数据库"></a>database() 查看当前打开的数据库</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select database() as out_put;
++---------+
+| out_put |
++---------+
+| mall    |
++---------+
+1 row in set (0.01 sec)</code></pre></div>
+
+<h3 id="user-当前用户"><a href="#user-当前用户" class="headerlink" title="user() 当前用户"></a>user() 当前用户</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select user() as out_put;
++----------------+
+| out_put        |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h2 id="流程控制函数"><a href="#流程控制函数" class="headerlink" title="流程控制函数"></a>流程控制函数</h2><h3 id="if"><a href="#if" class="headerlink" title="if()"></a>if()</h3><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select if(10&gt;5, &#39;大&#39;, &#39;小&#39;) as out_put;
++---------+
+| out_put |
++---------+
+| 大      |
++---------+
+1 row in set (0.00 sec)</code></pre></div>
+
+<h3 id="case"><a href="#case" class="headerlink" title="case()"></a>case()</h3><div class="hljs"><pre><code class="hljs ada"><span class="hljs-keyword">case</span>要判断的表达式
+<span class="hljs-keyword">when</span> 常量<span class="hljs-number">1</span> <span class="hljs-keyword">then</span> 语句
+<span class="hljs-keyword">when</span> 常量<span class="hljs-number">1</span> <span class="hljs-keyword">then</span> 语句
+...
+<span class="hljs-keyword">else</span> 值;
+<span class="hljs-keyword">end</span>;</code></pre></div>
+
+<h4 id="案例：查询员工工资，要求-部门号-30显示工资1-1倍，要求-部门号-40显示工资1-2倍"><a href="#案例：查询员工工资，要求-部门号-30显示工资1-1倍，要求-部门号-40显示工资1-2倍" class="headerlink" title="案例：查询员工工资，要求 部门号=30显示工资1.1倍，要求 部门号=40显示工资1.2倍"></a>案例：查询员工工资，要求 部门号=30显示工资1.1倍，要求 部门号=40显示工资1.2倍</h4><div class="hljs"><pre><code class="hljs mysql">mysql&gt; select salary 原始工资,department_id,
+    -&gt; case department_id
+    -&gt; when 30 then salary*1.1
+    -&gt; when 40 then salary*1.2
+    -&gt; else salary 
+    -&gt; end as 新工资
+    -&gt; from employees;
++--------------+---------------+-----------+
+| 原始工资     | department_id | 新工资      |
++--------------+---------------+-----------+
+|     24000.00 |            90 |  24000.00 |
+|     17000.00 |            90 |  17000.00 |
+|     17000.00 |            90 |  17000.00 |
+|      6500.00 |            40 |   7800.00 |
+|     10000.00 |            70 |  10000.00 |
+|     12000.00 |           110 |  12000.00 |
+|      8300.00 |           110 |   8300.00 |
++--------------+---------------+-----------+
+107 rows in set (0.01 sec)</code></pre></div>
+
+
+
+<h3 id="case-2"><a href="#case-2" class="headerlink" title="case()2"></a>case()2</h3><div class="hljs"><pre><code class="hljs ada"><span class="hljs-keyword">case</span>
+<span class="hljs-keyword">when</span> 条件<span class="hljs-number">1</span> <span class="hljs-keyword">then</span> 语句
+<span class="hljs-keyword">when</span> 条件<span class="hljs-number">1</span> <span class="hljs-keyword">then</span> 语句
+<span class="hljs-keyword">else</span> 值
+<span class="hljs-keyword">end</span></code></pre></div>
+
+<h4 id="案例：查询员工的新工资"><a href="#案例：查询员工的新工资" class="headerlink" title="案例：查询员工的新工资"></a>案例：查询员工的新工资</h4><blockquote>
+<p>如果工资&gt;20000,显示a级别</p>
+<p>如果工资&gt;15000,显示b级别</p>
+<p>如果工资&gt;1000, 显示c级别</p>
+<p>否则 显示 ‘d’ 级别</p>
+</blockquote>
+<div class="hljs"><pre><code class="hljs mysql">mysql&gt; select salary, 
+    -&gt; case 
+    -&gt; when salary&gt;20000 then &#39;A&#39;
+    -&gt; when salary&gt;15000 then &#39;B&#39; 
+    -&gt; when salary&gt;10000 then &#39;C&#39;
+    -&gt; else &#39;D&#39;
+    -&gt; end as 级别
+    -&gt; from employees; 
++----------+--------+
+| salary   | 级别   |
++----------+--------+
+| 24000.00 | A      |
+| 17000.00 | B      |
+| 17000.00 | B      |
+|  3100.00 | D      |
+| 11000.00 | C      |
+| 10500.00 | C      |
+| 10000.00 | D      |
+|  9500.00 | D      |
+| 10000.00 | D      |
+| 12000.00 | C      |
+|  8300.00 | D      |
++----------+--------+
+107 rows in set (0.00 sec)</code></pre></div>
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MySql/">MySql</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/30/%E6%95%B2%E5%BC%80PHP%E5%87%BD%E6%95%B0%E7%9A%84%E5%A4%A7%E9%97%A8/">
+                        <span class="hidden-mobile">敲开PHP函数的大门</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://github.com/muxik" target="_blank" rel="nofollow noopener"><span>Muxi_k</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MySql的一些笔记&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
